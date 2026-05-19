@@ -12,6 +12,18 @@
 
 ![banner](assets/banner.svg)
 
+## 关于作者
+
+**Zach**，公众号「Zach的进化笔记」主理人。计算机专业出身，毕业后做了亚马逊运营，在公司参与从 0 到接近 2 亿 GMV 的跨境电商业务增长。
+
+现在主要关注 AI Native 跨境电商公司的搭建：Skill、MCP、知识库、Agent 工作流，以及这些东西怎么真正落到电商团队的日常经营里。能开源的实践，会尽量开源。
+
+关注公众号「Zach的进化笔记」，回复「第二大脑」可以加入读者群。
+
+<p>
+  <img src="assets/qr-wechat.jpg" alt="Zach的进化笔记公众号二维码" width="180">
+</p>
+
 ## 下载
 
 | 格式 | 文件 |
@@ -73,8 +85,6 @@
 - [XTrace 对 AI Memory 工具版图的分析](https://xtrace.ai/blog/every-tool-is-solving-a-different-memory-problem)
 
 完整来源见 [references/sources.md](references/sources.md)。Garry Tan X 推文与 GBrain skillpack 的二次拆解见 [references/source-digests/garrytan-x-gbrain-2026-05-13.md](references/source-digests/garrytan-x-gbrain-2026-05-13.md)；v0.9 新增 Skill 能力与企业级 Remote MCP 接入拆解见 [references/source-digests/gbrain-skillpack-enterprise-mcp-2026-05-14.md](references/source-digests/gbrain-skillpack-enterprise-mcp-2026-05-14.md)。
-
-迭代记录见 [docs/ITERATIONS.md](docs/ITERATIONS.md)。
 
 ## 许可
 

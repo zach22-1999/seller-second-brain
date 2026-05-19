@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600" role="img" aria-labelledby="title desc">
-  <title id="title">GBrain orange book cover</title>
-  <desc id="desc">Book cover for the GBrain cross-border commerce orange book.</desc>
+  <title id="title">Seller second brain cover</title>
+  <desc id="desc">Book cover for Seller Second Brain, a GBrain field guide for cross-border commerce.</desc>
   <rect width="1200" height="1600" fill="#f7f1e7"/>
   <rect x="90" y="90" width="1020" height="1420" fill="#fffaf2" stroke="#2b2118" stroke-width="4"/>
-  <text x="140" y="260" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="86" font-weight="700" fill="#2b2118">GBrain</text>
-  <text x="140" y="360" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="78" font-weight="700" fill="#d85f2a">橙皮书</text>
-  <text x="140" y="455" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="38" fill="#5d5147">跨境电商 AI Native 第二大脑的实战指南</text>
+  <text x="140" y="260" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="82" font-weight="700" fill="#2b2118">卖家第二大脑</text>
+  <text x="140" y="360" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="62" font-weight="700" fill="#d85f2a">GBrain 实战笔记</text>
+  <text x="140" y="455" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="38" fill="#5d5147">让 Agent 像老员工一样懂你的生意</text>
   <g transform="translate(150 660)">
     <rect x="0" y="0" width="220" height="120" fill="#f0e1cf" stroke="#2b2118" stroke-width="3"/>
     <rect x="310" y="0" width="220" height="120" fill="#f0e1cf" stroke="#2b2118" stroke-width="3"/>
