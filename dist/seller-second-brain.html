@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Zach的进化笔记" />
+  <meta name="dcterms.date" content="2026-05-14" />
+  <title>卖家第二大脑：GBrain 实战笔记</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../assets/second-brain.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">卖家第二大脑：GBrain 实战笔记</h1>
+<p class="subtitle">让 Agent 像老员工一样懂你的生意</p>
+<p class="author">Zach的进化笔记</p>
+<p class="date">2026-05-14</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#卖家第二大脑" id="toc-卖家第二大脑">卖家第二大脑</a>
+<ul>
+<li><a href="#gbrain-实战笔记" id="toc-gbrain-实战笔记">GBrain 实战笔记</a></li>
+</ul></li>
+<li><a href="#前言为什么跨境电商团队迟早要建设-ai-第二大脑以及怎么做" id="toc-前言为什么跨境电商团队迟早要建设-ai-第二大脑以及怎么做">00 前言：为什么跨境电商团队迟早要建设 AI 第二大脑，以及怎么做</a></li>
+<li><a href="#导读这本书怎么读" id="toc-导读这本书怎么读">01 导读：这本书怎么读</a></li>
+<li><a href="#三条路线对比ragllm-wikigbrain" id="toc-三条路线对比ragllm-wikigbrain">02 三条路线对比：RAG、LLM Wiki、GBrain</a></li>
+<li><a href="#为什么-gbrain-值得单独写一本书" id="toc-为什么-gbrain-值得单独写一本书">03 为什么 GBrain 值得单独写一本书</a></li>
+<li><a href="#基础概念三层就够了" id="toc-基础概念三层就够了">04 基础概念：三层就够了</a></li>
+<li><a href="#page-first-与双读者设计" id="toc-page-first-与双读者设计">05 Page-first 与双读者设计</a></li>
+<li><a href="#obsidian-的位置不是被替代而是被更好利用" id="toc-obsidian-的位置不是被替代而是被更好利用">06 Obsidian 的位置：不是被替代，而是被更好利用</a></li>
+<li><a href="#gbrain-的位置与理解门槛" id="toc-gbrain-的位置与理解门槛">07 GBrain 的位置与理解门槛</a></li>
+<li><a href="#跨境业务知识对象第二大脑到底记什么" id="toc-跨境业务知识对象第二大脑到底记什么">08 跨境业务知识对象：第二大脑到底记什么</a></li>
+<li><a href="#正式页来源摘要页治理页不要把知识库写成文件夹" id="toc-正式页来源摘要页治理页不要把知识库写成文件夹">09 正式页、来源摘要页、治理页：不要把知识库写成文件夹</a></li>
+<li><a href="#compiled-truth-timeline既要当前结论也要变化轨迹" id="toc-compiled-truth-timeline既要当前结论也要变化轨迹">10 Compiled Truth + Timeline：既要当前结论，也要变化轨迹</a></li>
+<li><a href="#key-linksgraphschema-和-resolver" id="toc-key-linksgraphschema-和-resolver">11 Key Links、Graph、Schema 和 Resolver</a></li>
+<li><a href="#skill-mcp-的能力边界" id="toc-skill-mcp-的能力边界">12 Skill + MCP 的能力边界</a></li>
+<li><a href="#gbrain-的-skill-能力与团队工具分工" id="toc-gbrain-的-skill-能力与团队工具分工">13 GBrain 的 Skill 能力与团队工具分工</a></li>
+<li><a href="#从-20-条低风险知识样本开始" id="toc-从-20-条低风险知识样本开始">14 从 20 条低风险知识样本开始</a></li>
+<li><a href="#最小-markdown-brain-repo" id="toc-最小-markdown-brain-repo">15 最小 Markdown brain repo</a></li>
+<li><a href="#跨境业务复盘-mvp先聚焦广告与流量" id="toc-跨境业务复盘-mvp先聚焦广告与流量">16 跨境业务复盘 MVP：先聚焦广告与流量</a></li>
+<li><a href="#第二场景竞品分析" id="toc-第二场景竞品分析">17 第二场景：竞品分析</a></li>
+<li><a href="#让知识进入-agent-工作流" id="toc-让知识进入-agent-工作流">18 让知识进入 Agent 工作流</a></li>
+<li><a href="#轻量-eval怎么知道第二大脑真的有用" id="toc-轻量-eval怎么知道第二大脑真的有用">19 轻量 eval：怎么知道第二大脑真的有用</a></li>
+<li><a href="#企业级使用-gbrain从个人-brain-到团队-agent-记忆层" id="toc-企业级使用-gbrain从个人-brain-到团队-agent-记忆层">20 企业级使用 GBrain：从个人 brain 到团队 Agent 记忆层</a></li>
+<li><a href="#为什么你需要两个大脑业务大脑与个人大脑" id="toc-为什么你需要两个大脑业务大脑与个人大脑">21 为什么你需要两个大脑：业务大脑与个人大脑</a></li>
+<li><a href="#个人大脑实操指南从目录到跨模型迁移" id="toc-个人大脑实操指南从目录到跨模型迁移">22 个人大脑实操指南：从目录到跨模型迁移</a></li>
+<li><a href="#什么不该进入-gbrain" id="toc-什么不该进入-gbrain">23 什么不该进入 GBrain</a></li>
+<li><a href="#风险幻觉写入知识污染维护成本过度自动化" id="toc-风险幻觉写入知识污染维护成本过度自动化">24 风险：幻觉写入、知识污染、维护成本、过度自动化</a></li>
+<li><a href="#给不同团队的落地建议" id="toc-给不同团队的落地建议">25 给不同团队的落地建议</a></li>
+<li><a href="#结语从-skill-工具箱到-ai-native-第二大脑" id="toc-结语从-skill-工具箱到-ai-native-第二大脑">26 结语：从 Skill 工具箱到 AI Native 第二大脑</a></li>
+<li><a href="#附录-a术语表" id="toc-附录-a术语表">附录 A：术语表</a></li>
+<li><a href="#附录-b样例页面模板" id="toc-附录-b样例页面模板">附录 B：样例页面模板</a></li>
+<li><a href="#附录-c七步上手清单" id="toc-附录-c七步上手清单">附录 C：七步上手清单</a></li>
+<li><a href="#附录-d来源与参考资料" id="toc-附录-d来源与参考资料">附录 D：来源与参考资料</a></li>
+<li><a href="#附录-e后续学习路径" id="toc-附录-e后续学习路径">附录 E：后续学习路径</a></li>
+<li><a href="#附录-f场景速查表" id="toc-附录-f场景速查表">附录 F：场景速查表</a></li>
+</ul>
+</nav>
+<section id="卖家第二大脑" class="book-cover">
+<h1>卖家第二大脑</h1>
+<p><span class="cover-rule"></span></p>
+<h2 id="gbrain-实战笔记">GBrain 实战笔记</h2>
+<p>让 Agent 像老员工一样懂你的生意</p>
+<p><span class="cover-version">v2.0</span></p>
+<p><span class="cover-author">公众号「Zach的进化笔记」</span></p>
+</section>
+<div class="book-about">
+<p class="about-author">
+关于作者
+</p>
+<div class="about-bio">
+<p>
+<strong>Zach</strong>，公众号「Zach的进化笔记」主理人。
+</p>
+<p>
+计算机专业没学好所以一毕业就干了亚马逊的运营。<br>还不是老板，所以只能开玩笑说自己是「亿级操盘手」，也确实是在公司用两年从 0 做到年销售额接近 2 亿 GMV。<br>走的是白帽精品路线。擅长的是站内广告、DSP、季节性 FBA 库存管理，是个运营人，而不是程序员。
+</p>
+<p>
+正在做一件自己觉得挺兴奋的事：搭一家 AI Native 的跨境电商公司。过程中沉淀的 Skill、MCP、知识库实践，能开源的都开源。
+</p>
+<p>
+这本书不是教程。是我在真实搭建跨境电商 AI 第二大脑时形成的判断——有些对，有些可能会改，但都是真的在用。
+</p>
+</div>
+<div class="qr-cards">
+<div class="qr-card qr-wechat">
+<img src="../assets/qr-wechat.jpg" alt="Zach的进化笔记 公众号">
+<p class="qr-label">
+公众号：Zach的进化笔记
+</p>
+<p class="qr-desc">
+回复”第二大脑”加读者群
+</p>
+<p class="qr-desc-sub">
+核心输出：开源通用 Skill / MCP，输出电商公司落地 AI 的想法和判断
+</p>
+</div>
+<div class="qr-card qr-zsxq">
+<img src="../assets/qr-zsxq.png" alt="Zach的跨境AI资产库 知识星球">
+<p class="qr-label">
+知识星球：Zach的跨境AI资产库
+</p>
+<p class="qr-desc">
+并非交付课程
+</p>
+<p class="qr-desc-sub">
+深入交流 AI 落地到企业的卡点，在星球内沉淀 Skill、知识库等未来的 AI 资产
+</p>
+</div>
+</div>
+</div>
+<h2 id="前言为什么跨境电商团队迟早要建设-ai-第二大脑以及怎么做">00 前言：为什么跨境电商团队迟早要建设 AI 第二大脑，以及怎么做</h2>
+<div class="callout-question">
+<p>这本书到底要解决什么？</p>
+</div>
+<blockquote>
+<p>跨境电商 AI 化的下一个瓶颈不是工具不够多，而是 Agent 没有业务记忆。</p>
+</blockquote>
+<h3 id="五条底层判断">五条底层判断</h3>
+<p>在展开之前，先亮底牌。这本书的所有内容建立在这五条判断之上——如果你同意其中三条以上，值得往下读；如果每一条都存疑，更值得——后面的章节就是在用跨境电商的真实场景回答”凭什么”。</p>
+<div class="core-judgment">
+<ol type="1">
+<li><strong>Skill 和 MCP 有明显的能力天花板。</strong> 没有业务记忆层，AI 长期做不到真正好用。工具再多、连接再强，Agent 每次还是从零开始判断。</li>
+<li><strong>LLM Wiki 是方法论，GBrain 是这个方法论目前的最佳答案。</strong> 卡帕西提出了把知识整理成 LLM 能读的页面网络的框架，GBrain 把它变成了可安装、可运行、可维护的系统。</li>
+<li><strong>知识库不是资料库。</strong> 把文件塞进 AI 不等于给它记忆。记忆是结构化的判断、关系和时间线，不是一堆搜索结果。</li>
+<li><strong>这件事难在理解，不难在技术。</strong> 安装 GBrain 半小时就能跑。但理解”什么该写成记忆页、什么只是噪声”——这需要业务判断，不是技术能力。</li>
+<li><strong>人和 Agent 的长期协作，需要 Agent 拥有你的个人第二大脑。</strong> 业务记忆服务组织，个人记忆服务你自己。两层记忆，才是完整的 AI Native 第二大脑。</li>
+</ol>
+</div>
+<p>这不是 GBrain README 的中文转述。这是我在真实搭建跨境电商 AI 第二大脑过程中形成的判断，有些可能会随着 GBrain 的迭代而变化，但到目前为止我认为它们成立。</p>
+<h3 id="skill-和-mcp-的天花板在哪里">Skill 和 MCP 的天花板在哪里</h3>
+<p>你可能已经感觉到了——AI 工具越来越多，Skill 越来越强，但实际业务中 Agent 给你的建议还是经常”差口气”。</p>
+<p>它写的广告分析看上去像模像样，却不知道你上个月已经因为库存不足暂停了这条产品线。它能帮你调 CPC，却不知道你们内部”利润率低于 15% 的链接不再加预算”这条规则。它能把复盘写完，明天还是像新人一样重新开始——不记得上次”加大投放”被执行后结果如何，也不知道团队为什么形成了”库存覆盖不足 21 天时暂停放量”的规则。</p>
+<p>这不是 AI 不聪明。Skill 解决的是”怎么做”——怎么跑广告分析、怎么写 listing、怎么复盘。MCP 解决的是”能连什么”——能读报表、能调 API、能查数据。但”为什么这样做”——上次的判断、上次的结果、团队积累的经验——这些全丢了。</p>
+<p>天花板不是工具不行，而是没有记忆层。Agent 缺的不是能力，是三层东西：</p>
+<p><strong>缺上下文。</strong> Agent 每次从零开始，不知道上次的业务判断。明明告诉过它北美站转化率在下降、应该控制预算，下次问到同一个产品时它又建议加大投放。不是判断力不够，是根本不记得上次的结论。</p>
+<p><strong>缺关系。</strong> Agent 能查单个产品的数据，但不知道这个产品和哪些渠道、竞品、供应链约束有关联。跨境业务的判断几乎都是跨对象的——暂停一个广告活动，可能是因为库存、竞品、利润率三方面同时出了变化。看不到这些关系，就只能给出片面建议。</p>
+<p><strong>缺演进。</strong> Agent 不知道”上次为什么这样决策、后来结果如何”。没有时间线，就没有复盘能力。而跨境电商最有价值的经验恰恰是”上次踩了坑，这次怎么避开”。</p>
+<p>所以你需要的不是更多工具，而是一套业务记忆系统——让 Agent 带着你团队的长期判断去做事。</p>
+<h3 id="llm-wiki-是方法论gbrain-是落地答案">LLM Wiki 是方法论，GBrain 是落地答案</h3>
+<p>如果你关注 AI，大概率听过卡帕西的 LLM Wiki——把知识整理成 LLM 能读懂、能引用、能更新的 Markdown 页面网络。这个洞察很对，也是目前知道的人最多的 AI 知识库方法论。</p>
+<p>但 LLM Wiki 是方法论，不是工具。真正落地时，搜索怎么做、关系怎么连、Agent 怎么调用、怎么防止知识腐烂——全要自己搭。对没有 AI 工程团队的跨境电商公司来说，LLM Wiki 很容易跑出 demo，却不容易变成长期可维护的系统。</p>
+<p>GBrain 做的就是这件事。它来自 Y Combinator President &amp; CEO Garry Tan 自己的 OpenClaw / Hermes 工作流（来源：<a href="https://www.ycombinator.com/people/garry-tan">YC 人物页</a>、<a href="https://x.com/garrytan/status/2042497872114090069">X 推文</a>），把 LLM Wiki 方法论变成了一套可安装、可维护的系统——自带 34 个 skills、recurring jobs、MCP 接入，已经把 PDF、图片、语音、社媒和长文研究纳入 Agent Brain 框架。</p>
+<p>我们选择围绕 GBrain 写这本书，不是因为它功能最多，而是因为它是目前 LLM Wiki 方法论下工程化程度最高、维护者持续投入最深的开源答案。</p>
+<h3 id="记忆不是搜索结果">记忆不是搜索结果</h3>
+<p>把文件塞进 AI 不等于给它记忆。很多团队做的”知识库”，本质上是文件搜索——把一堆报表、会议纪要、竞品截图丢进去，AI 帮你搜出”包含’预算’的段落”。</p>
+<p>但记忆是另一回事。一个能回答”上次为什么暂停北美站厨房收纳盒的广告预算”的系统，和一个只能找出包含”预算”关键词的段落的系统，差距不在检索能力，在于有没有人把判断整理成 Agent 能理解的结构化页面——带着对象、关系、时间线和当时的决策背景。</p>
+<p>这本书花最多篇幅讲的就是：怎么把跨境电商的业务判断变成这种结构化记忆。</p>
+<h3 id="难在理解不在技术">难在理解，不在技术</h3>
+<p>安装 GBrain 半小时就能跑起来。但理解”什么该写成记忆页、什么该留在原始文件”“哪些判断值得沉淀、哪些只是噪声”——这需要业务判断，不是技术问题。这本书花最多篇幅讲的不是怎么装，而是怎么想。</p>
+<h3 id="个人第二大脑">个人第二大脑</h3>
+<p>业务大脑让 Agent 带着组织的记忆做事，但这只是一半。另一半是：Agent 还需要知道你是谁——你的判断习惯、工作偏好、过往决策和长期积累的认知。</p>
+<p>今天你每换一个模型、每开一个新对话，都在从零开始”教”AI 认识你。上周在 Claude 里梳理的竞品判断，这周到 ChatGPT 问同一个问题时它完全不知道。这不是效率问题，而是协作模式的根本缺陷。真正的人机长期协作，建立在 Agent 对你的持续理解之上——而这份理解不应该被锁在任何一个模型或平台里。</p>
+<h3 id="这本书的路线">这本书的路线</h3>
+<p>路线很简单：先不搬空所有历史资料，也不追求自动化闭环。先用低风险样本建一个人能读的 Markdown brain repo，再让 GBrain sync、embed、query，最后接入 Agent 工作流做轻量 eval。先证明这套 brain 能召回对象、关系、判断和时间线，再逐步扩展。</p>
+<div class="callout-action">
+<p>先别急着安装 GBrain。先写下你团队最近 3 个重复出现的判断问题——Agent 每次都答不出来的那种。再写下第一版 brain 应该从哪 10 条业务记录开始。</p>
+</div>
+<h2 id="导读这本书怎么读">01 导读：这本书怎么读</h2>
+<div class="callout-question">
+<p>这么长一本书，不从头读可以吗？</p>
+</div>
+<p>可以。这本书要大而全，但读者不需要从头到尾读。不同角色按问题跳读。</p>
+<h3 id="如果你是非技术卖家老板">如果你是非技术卖家老板</h3>
+<p>优先看：</p>
+<ul>
+<li><code>00 前言</code></li>
+<li><code>02 三条路线对比</code></li>
+<li><code>03 为什么 GBrain 值得单独写一本书</code></li>
+<li><code>12 Skill + MCP 的能力边界</code></li>
+<li><code>20 企业级使用 GBrain</code></li>
+<li><code>21 双脑架构：业务大脑与个人大脑</code></li>
+<li><code>23 什么不该进入 GBrain</code></li>
+<li><code>25 给不同团队的落地建议</code></li>
+</ul>
+<p>你要解决的是判断问题：这件事值不值得做，应该投入到什么程度，哪些坑不能踩。</p>
+<h3 id="如果你是懂一点-ai-工具的运营负责人">如果你是懂一点 AI 工具的运营负责人</h3>
+<p>优先看：</p>
+<ul>
+<li><code>05 Page-first 与双读者设计</code></li>
+<li><code>06 Obsidian 的位置</code></li>
+<li><code>08 跨境业务知识对象</code></li>
+<li><code>13 GBrain 的 Skill 能力与团队工具分工</code></li>
+<li><code>14 从 20 条低风险知识样本开始</code></li>
+<li><code>16 跨境业务复盘 MVP</code></li>
+<li><code>18 让知识进入 Agent 工作流</code></li>
+<li><code>20 企业级使用 GBrain</code></li>
+<li><code>21 双脑架构：业务大脑与个人大脑</code></li>
+</ul>
+<p>你要解决的是组织问题：飞书、Obsidian、GBrain、Codex、Skill、MCP 怎么分工。</p>
+<h3 id="如果你是准备搭内部-ai-工作流的执行者">如果你是准备搭内部 AI 工作流的执行者</h3>
+<p>优先看：</p>
+<ul>
+<li><code>04 基础概念</code></li>
+<li><code>05 Page-first 与双读者设计</code></li>
+<li><code>07 GBrain 的位置与理解门槛</code></li>
+<li><code>09 正式页、来源摘要页、治理页</code></li>
+<li><code>11 Schema 和 Resolver</code></li>
+<li><code>15 最小 Markdown brain repo</code></li>
+<li><code>18 让知识进入 Agent 工作流</code></li>
+<li><code>19 轻量 eval</code></li>
+<li><code>20 企业级使用 GBrain</code></li>
+<li><code>22 个人大脑实操指南</code></li>
+</ul>
+<p>你要解决的是落地问题：目录怎么建、页面怎么写、关系怎么连、Agent 怎么查、怎么验证有用。</p>
+<h3 id="本书的虚构案例">本书的虚构案例</h3>
+<p>全书用一个虚构的跨境电商场景串联：一个做家居收纳的亚马逊卖家团队，3 条产品线（厨房收纳、衣柜收纳、浴室配件），主要在北美站和欧洲站经营，面临供应链周期性波动和竞品低价冲量的挑战。这不是任何真实公司，但场景都来自跨境电商的常见业务判断。</p>
+<h3 id="章节地图">章节地图</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>部分</th>
+<th>章节</th>
+<th>解决的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一部分：为什么需要这本书</td>
+<td>00-01</td>
+<td>跨境电商为什么迟早要建设 AI 第二大脑，读者怎么跳读</td>
+</tr>
+<tr>
+<td>第二部分：三条技术路线</td>
+<td>02-03</td>
+<td>RAG、LLM Wiki、GBrain 的差异，以及为什么 GBrain 值得认真理解</td>
+</tr>
+<tr>
+<td>第三部分：理解 GBrain</td>
+<td>04-07</td>
+<td>基础概念、page-first、Obsidian、GBrain 的位置与理解门槛</td>
+</tr>
+<tr>
+<td>第四部分：跨境业务知识怎么建模</td>
+<td>08-13</td>
+<td>业务对象、三层页面、schema、Skill / MCP、GBrain Skill 能力与团队工具分工</td>
+</tr>
+<tr>
+<td>第五部分：实战路线</td>
+<td>14-22</td>
+<td>从 20 条样本到复盘 MVP、竞品分析、sync、query、eval、企业级接入、双脑架构和个人大脑实操</td>
+</tr>
+<tr>
+<td>第六部分：风险与下一步</td>
+<td>23-26</td>
+<td>写入边界、风险、团队建议和长期判断</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-action">
+<p>按你的角色选 6 章先读，不要把这本书当成必须顺序阅读的教材。</p>
+</div>
+<div class="part-divider">
+<p>第二部分：三条技术路线</p>
+</div>
+<h2 id="三条路线对比ragllm-wikigbrain">02 三条路线对比：RAG、LLM Wiki、GBrain</h2>
+<div class="callout-question">
+<p>前言说了”LLM Wiki 是方法论，GBrain 是落地答案”——但如果你想更深入理解这个判断背后的技术路线差异，这一章拆开讲。</p>
+</div>
+<p>跨境电商团队要做 AI 知识库，最容易混淆三条路线。它们不是简单的新旧关系，而是把”资料、页面、长期记忆”放在不同位置。</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>路线</th>
+<th>基本单位</th>
+<th>Agent 做什么</th>
+<th>最适合解决</th>
+<th>最容易卡在哪里</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传统 RAG</td>
+<td>chunk</td>
+<td>查询时临时召回片段</td>
+<td>查资料、找原文、补证据</td>
+<td>每次都重新拼，判断不积累</td>
+</tr>
+<tr>
+<td>LLM Wiki</td>
+<td>page</td>
+<td>把来源整理进 Markdown wiki</td>
+<td>把知识组织成页面网络</td>
+<td>目录、关系、同步、检索、治理要自己补</td>
+</tr>
+<tr>
+<td>GBrain</td>
+<td>agent-maintained memory</td>
+<td>对页面做检索、关系、时间线和 MCP 调用</td>
+<td>让 Agent 长期使用业务记忆</td>
+<td>难在理解它的设计和边界</td>
+</tr>
+</tbody>
+</table>
+<h3 id="传统-rag能查资料但不等于业务记忆">传统 RAG：能查资料，但不等于业务记忆</h3>
+<p>RAG（Retrieval-Augmented Generation，检索增强生成）的常见路径是 chunk-first：把原始文档切成片段，做 embedding，再按相似度召回。简单说就是 AI 先搜一遍资料再回答你——类似于你问助理一个问题，助理先翻了一遍文件夹，然后把找到的片段拼成回答。Karpathy 在 <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">LLM Wiki 原文</a>里把这种模式概括为：上传文件，模型在查询时检索相关片段，然后生成回答。</p>
+<p>这条路线成熟实用，但它解决的是资料召回，不是业务记忆。跨境业务里，很多看似在”查资料”的问题，实际在追溯判断——“为什么上次暂停了北美站厨房收纳盒的广告预算”，这个问题很难靠一个 chunk 回答，因为判断分散在报表、会议、竞品截图、供应链状态和运营经验里。</p>
+<p>chunk-first 的三个上限：第一，chunk 容易丢上下文——一个片段提到”CPC 上升”，却没提到利润、库存和当周目标。第二，embedding 擅长找相似，不擅长找关系——它知道”流量成本上升”和”广告变贵”相近，却不知道某个流量动作被哪次供应链约束限制。第三，RAG 默认不维护当前结论——业务知识会变，一个渠道今天该收缩，三周后可能该恢复。</p>
+<p>这不是否定 RAG。RAG 适合做资料层、证据层、原文检索层。它应该成为 AI 第二大脑的一部分，而不是承担整个系统。</p>
+<h3 id="llm-wiki好方法论但工程化要自己补">LLM Wiki：好方法论，但工程化要自己补</h3>
+<p>LLM Wiki 的突破，是把知识从 chunk 推到 page：先把资料整理成持续更新的 Markdown 页面，用链接和 schema 组织起来，再让 LLM 读取这些页面。这比 RAG 更接近业务——跨境团队真正需要的不是”找一段相似文字”，而是”理解一个产品、一个渠道、一个竞品、一个决策的历史”。</p>
+<p>Karpathy 原文把 LLM Wiki 拆成三层和三类操作：</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>层 / 操作</th>
+<th>意思</th>
+<th>对跨境团队的翻译</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raw sources</td>
+<td>原始资料，LLM 读取但不修改</td>
+<td>报表、会议纪要、竞品资料、截图</td>
+</tr>
+<tr>
+<td>Wiki</td>
+<td>LLM 生成和维护的 Markdown 页面</td>
+<td>产品页、渠道页、竞品页、复盘页</td>
+</tr>
+<tr>
+<td>Schema</td>
+<td>告诉 LLM 怎么组织 wiki 的规则</td>
+<td>命名、目录、字段、写入流程</td>
+</tr>
+<tr>
+<td>Ingest</td>
+<td>新来源进入时，写摘要、更新页面和索引</td>
+<td>新报告进来后更新复盘页</td>
+</tr>
+<tr>
+<td>Query</td>
+<td>查询 wiki，有价值的答案写回页面</td>
+<td>问”为什么暂停预算”，答案变成决策页</td>
+</tr>
+<tr>
+<td>Lint</td>
+<td>定期检查矛盾、过期、孤页、缺链接</td>
+<td>防止知识库越写越乱</td>
+</tr>
+</tbody>
+</table>
+<p>原文还强调两个导航文件：<code>index.md</code>（内容导航，帮 LLM 找相关页面）和 <code>log.md</code>（时间日志，记录变更历史）。</p>
+<p>这些机制很强，也解释了为什么 LLM Wiki 能跑出漂亮 demo。但它仍然是方法论。它没有替你完成数据库、检索融合、typed graph、timeline、MCP、维护循环和评估体系。没有工程团队时，这些会变成长期成本。</p>
+<h3 id="gbrain持续演进的-agent-brain-框架">GBrain：持续演进的 Agent Brain 框架</h3>
+<p>Garry Tan 本人在介绍 GBrain 时做了一个明确区分：这不是”RAG in a box”，而是一套完整的知识系统（knowledge system）——8 层架构协同工作，让 Agent 不只是检索资料，而是真正理解你的业务上下文（来源：<a href="https://x.com/garrytan/status/2055670533451366479">X 主帖</a>）。</p>
+<p>GBrain 保留 Markdown 作为知识源，同时引入数据库、Hybrid Search、typed links、timeline、MCP 和维护流程。GBrain README 明确强调这些能力，正是 LLM Wiki 方法论落地后会遇到的工程问题（来源：<a href="https://github.com/garrytan/gbrain/blob/master/README.md">GBrain README</a>）。</p>
+<p>但它不只是”把 LLM Wiki 工程化”。官方 README 当前写到：项目来自 Garry Tan 自己的 OpenClaw / Hermes 工作流，安装流程会加载 34 个 skills，并配置 recurring jobs；skillpack 还提供 <code>media-ingest</code>、<code>book-mirror</code>、<code>brain-pdf</code>、<code>X-to-Brain</code>、<code>Voice-to-Brain</code> 等已经写好的能力（来源：<a href="https://github.com/garrytan/gbrain/blob/master/README.md">GBrain README</a>、<a href="https://github.com/garrytan/gbrain/blob/master/docs/GBRAIN_SKILLPACK.md">GBRAIN_SKILLPACK</a>）。</p>
+<p>这意味着 GBrain 的核心不是”多了一个数据库”，而是把 memory、skills、MCP、定时任务和跨模态摄取放在同一套 Agent 工作流里。</p>
+<div class="callout-example">
+<p>传统 RAG 能找出某份渠道报告里的异常数据；LLM Wiki 能把这次异常写成一页复盘；GBrain 则让下次 Agent 做同类复盘时，沿着产品、渠道、关键词、竞品、供应链约束，把上次判断调出来。如果团队还要处理 PDF 行业报告、竞品图片、会议录音或社媒素材，GBrain 内置 skillpack 的价值就从”技术组件”变成”可复用工作流”。</p>
+</div>
+<h3 id="落地决策选哪条路线">落地决策：选哪条路线</h3>
+<p>如果上面的技术对比还太抽象，下面这张表帮你做实际决策：</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>维度</th>
+<th>传统 RAG</th>
+<th>LLM Wiki（自建）</th>
+<th>GBrain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>团队要求</td>
+<td>不需要专人维护 AI</td>
+<td>需要有人持续整理 Markdown</td>
+<td>同 LLM Wiki，GBrain 处理工程部分</td>
+</tr>
+<tr>
+<td>首次见效时间</td>
+<td>小时级（上传文件，开始提问）</td>
+<td>天级（写页面、连关系）</td>
+<td>天级（同样的页面工作 + sync/embed）</td>
+</tr>
+<tr>
+<td>长期维护成本</td>
+<td>低（文件是静态的）</td>
+<td>高（页面不维护会腐烂）</td>
+<td>中（内置维护 skills 辅助）</td>
+</tr>
+<tr>
+<td>典型失败模式</td>
+<td>无法回答跨对象的判断问题</td>
+<td>工程缺口累积导致 Agent 用不上</td>
+<td>理解缺口导致页面质量低</td>
+</tr>
+</tbody>
+</table>
+<p>没有哪条路线是错误的起点。如果你现在连资料都还没有集中存放，RAG 是合理的第一步。如果你已经在用 Obsidian 整理知识但 Agent 用不上，GBrain 是下一步。</p>
+<div class="callout-action">
+<p>判断你团队现在处在哪一层：你是在查资料（RAG），在整理页面（LLM Wiki），还是已经需要 Agent 长期调用业务记忆（GBrain）？</p>
+</div>
+<h2 id="为什么-gbrain-值得单独写一本书">03 为什么 GBrain 值得单独写一本书</h2>
+<div class="callout-question">
+<p>开源项目那么多，为什么 GBrain 不是普通工具介绍，而值得写成一本实战笔记？</p>
+</div>
+<p>GBrain 值得单独写，是因为它试图回答一个跨境团队迫切需要但市面上没人系统讲过的问题：LLM Wiki 里的 Markdown 页面，如何变成 Agent 长期记忆系统。</p>
+<p>这件事对跨境电商团队很关键。卖家需要的不是漂亮知识库，而是一套能被持续使用的业务记忆：人能读懂页面、运营能在 Obsidian 里编辑和追溯、Agent 能通过 GBrain 检索和调用、Skill 能把判断流程稳定执行、新结论能回到长期记忆而不是消失在一次对话里。</p>
+<h3 id="gbrain-值得观察的三层">GBrain 值得观察的三层</h3>
+<p>第一，维护者和使用场景很特殊。GBrain README 把它描述成支撑 Garry Tan 个人 OpenClaw / Hermes 部署的生产 brain，不是临时 demo。他在 X 上也公开将 GBrain 放在 Agent 长期记忆语境中，强调面向 10,000+ Markdown 文件的长期召回和 MIT 开源（来源：<a href="https://x.com/garrytan/status/2042497872114090069">X 推文</a>）。迭代速度也值得关注：仅 2026 年 5 月中旬一次更新就在 72 小时内合并 14 个 PR，新增热记忆层、实时事实提取等生产级特性（来源：<a href="https://x.com/garrytan/status/2054055071017538028">X 更新帖</a>）。Garry Tan 还公开表示，结合 OpenClaw/Hermes + GBrain 的方案，可以用 $100/月达到原本 $10,000/月方案的效果（来源：<a href="https://x.com/garrytan/status/2055310116325560647">X 帖</a>）——这个数字是维护者的公开表述，不是我们的独立验证，但它说明了成本门槛在快速下降。</p>
+<p>第二，它带着一套持续扩展的 skillpack。官方 README 当前写到 34 个 skills，<code>gbrain skillpack install</code> 还提供 25 个 curated skills 的安装路径。重点不是数字，而是设计方向：GBrain 把”怎么维护 brain”变成可安装、可检查、可升级的 Agent 工作流（来源：<a href="https://github.com/garrytan/gbrain/blob/master/docs/GBRAIN_SKILLPACK.md">GBRAIN_SKILLPACK</a>）。</p>
+<p>第三，它已经把跨模态、研究和运营型能力纳入同一框架。<code>book-mirror</code> 把一本书按章节做双栏分析，一边保留章节内容，一边映射到你的 brain 语境。翻译成跨境业务就是：让 Agent 带着你的产品、渠道、竞品、供应链判断去读行业报告和平台政策，再把有用判断回写到复盘系统。</p>
+<h3 id="公开讨论怎么帮助我们判断">公开讨论怎么帮助我们判断</h3>
+<p>这个判断不只来自我们的业务感受。<a href="https://repo-explainer.com/garrytan/gbrain/">Repo Explainer</a> 把 GBrain 放在 Agent memory operating layer 的位置；<a href="https://www.chooseai.net/news/3236/">ChooseAI</a> 讨论了它相对 LLM Wiki 在 Postgres、pgvector、三层搜索上的工程推进；<a href="https://xtrace.ai/blog/every-tool-is-solving-a-different-memory-problem">XTrace</a> 则把 Karpathy LLM Wiki 和 GBrain 放进 AI memory 工具版图里比较。我们做的，是把这些 AI 领域判断翻译成跨境电商的业务落地路径。</p>
+<h3 id="难点从工程转向理解">难点从工程转向理解</h3>
+<p>对非技术团队来说，GBrain 的好处是：很多工程层已经有开源项目承接。难点随之变化：你不一定要从零做数据库和 MCP，但你必须理解它为什么强调 page-first、compiled truth、timeline、typed links、source digest 和 governance。这本书要解决的正是这道理解鸿沟。</p>
+<div class="callout-action">
+<p>用一句话写下你对 GBrain 的定位：它是笔记软件、搜索系统，还是 Agent 长期记忆层？如果你写不出来，这本书后面会帮你理清。</p>
+</div>
+<p>GBrain 是 LLM Wiki 方法论工程化最完整的开源答案——这一点前面两章已经讲清楚了。但在正式动手之前，你需要先学会它的基础语言。好消息是，GBrain 的概念体系虽然名词不少，只需要理解三层关系就能抓住全貌。</p>
+<div class="part-divider">
+<p>第三部分：理解 GBrain</p>
+</div>
+<h2 id="基础概念三层就够了">04 基础概念：三层就够了</h2>
+<div class="callout-question">
+<p>22 个新术语听起来很吓人，但你只需要先理解 3 层关系。</p>
+</div>
+<p>先看一个对比。</p>
+<div class="callout-example">
+<p><strong>没有三层时</strong>：你问 Agent”厨房收纳盒北美站的广告预算该不该继续加？“Agent 搜了一堆包含”收纳盒”和”预算”的段落，拼出一个看起来合理的建议——但它不知道上次暂停预算是因为库存覆盖不足，不知道竞品 B 当时在低价冲量，也不知道团队后来复盘认为”那次暂停是正确的”。</p>
+<p><strong>有三层后</strong>：来源层保留了当时的渠道报告和竞品截图（证据）；知识层有一页厨房收纳盒产品页，Compiled Truth 写着”库存低于 21 天覆盖时暂停放量”，Timeline 记录了暂停-恢复-结果的完整轨迹；使用层让 Agent 通过 query 拿到这页，沿着关系找到关联的渠道页和竞品页，最终回答”上次暂停是正确的，当前库存已恢复，可以考虑重启，但注意竞品 B 仍在低价期”。</p>
+</div>
+<p>不需要先成为 AI 工程师。理解 GBrain 的起点是分清三层：来源层（材料从哪里来）、知识层（哪些判断被整理成稳定页面）、使用层（Agent 怎么检索和调用）。很多人卡住，是因为把三层混在一起。</p>
+<h3 id="来源层保留证据不急着写结论">来源层：保留证据，不急着写结论</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>术语</th>
+<th>一句话解释</th>
+<th>跨境业务例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>一份完整原始材料</td>
+<td>一份渠道报告、会议纪要、竞品观察文档</td>
+</tr>
+<tr>
+<td>Raw source</td>
+<td>不被 LLM 修改的原始来源</td>
+<td>原始报表、截图、录音转写</td>
+</tr>
+<tr>
+<td>Source digest</td>
+<td>对来源材料的结构化摘要</td>
+<td>一份竞品报告的要点、范围、时间、可信度</td>
+</tr>
+<tr>
+<td>Chunk</td>
+<td>为检索切出来的文本片段</td>
+<td>长报告里被切出的 800 字片段</td>
+</tr>
+</tbody>
+</table>
+<p>最重要的区分：source digest 保留来源证据，不能直接冒充业务结论。</p>
+<h3 id="知识层把材料整理成人能读的页面">知识层：把材料整理成人能读的页面</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>术语</th>
+<th>一句话解释</th>
+<th>跨境业务例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Page</td>
+<td>可命名、可链接、可维护的知识页</td>
+<td>厨房收纳盒产品页、北美站渠道页</td>
+</tr>
+<tr>
+<td>Wikilink</td>
+<td>Markdown 内部链接</td>
+<td><code>[[厨房收纳盒]]</code> 指向产品页</td>
+</tr>
+<tr>
+<td>Graph</td>
+<td>对象之间的关系网</td>
+<td>产品 → 渠道 → 决策</td>
+</tr>
+<tr>
+<td>Typed link</td>
+<td>有类型的关系</td>
+<td><code>决策 -&gt; 影响 -&gt; 广告活动</code></td>
+</tr>
+<tr>
+<td>Schema</td>
+<td>页面结构和写作规则</td>
+<td>type、product、channel、week、status</td>
+</tr>
+</tbody>
+</table>
+<p>Compiled truth（当前最可信的综合判断）、resolver（把不同叫法对齐到同一对象）和 timeline（关键变化轨迹）也属于知识层，后续章节会展开。</p>
+<p>最重要的区分：page 不是随手笔记，而是经过整理的、人和 Agent 都能理解的业务判断载体。</p>
+<h3 id="使用层让-agent-能检索调用和维护">使用层：让 Agent 能检索、调用和维护</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>术语</th>
+<th>一句话解释</th>
+<th>跨境业务例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Embedding</td>
+<td>把文本变成可比较的向量——就像给每条业务记录贴一个隐形标签，让系统能判断哪些记录和你的问题最相关</td>
+<td>判断”流量成本上升”和”广告变贵”相近</td>
+</tr>
+<tr>
+<td>Index</td>
+<td>帮系统快速找到内容的索引</td>
+<td>关键词索引、向量索引</td>
+</tr>
+<tr>
+<td>Query</td>
+<td>向知识库提问并综合回答</td>
+<td>“上次为什么暂停渠道预算？”</td>
+</tr>
+<tr>
+<td>Sync / embed</td>
+<td>把页面变化同步并更新检索索引</td>
+<td>Obsidian 改完页面后让 GBrain 更新</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>让 Agent 连接工具的标准接口——就像 USB 是让设备连接电脑的标准接口</td>
+<td>Agent 在复盘中查询 GBrain</td>
+</tr>
+<tr>
+<td>Skill</td>
+<td>可复用的任务方法</td>
+<td>广告复盘 Skill、竞品分析 Skill</td>
+</tr>
+</tbody>
+</table>
+<p>Eval（检查召回质量）和 lint（检查知识库健康）也属于使用层，在实战路线部分展开。</p>
+<p>最重要的区分：embedding 找语义相似，graph 找业务关系——两者互补，不能互替。Obsidian 图谱读取 Markdown 文件和 wikilinks，GBrain 会把同一套 Markdown repo 同步进自己的检索和关系系统。</p>
+<div class="flow-diagram">
+<ol type="1">
+<li>Raw source（原始材料）</li>
+<li>Source digest（来源摘要）</li>
+<li>Formal page（正式知识页）</li>
+<li>Key Links / Schema / Timeline</li>
+<li>GBrain sync / embed / query</li>
+<li>Agent 在任务中调用</li>
+</ol>
+</div>
+<div class="callout-action">
+<p>挑你手边 5 条材料，按来源层、知识层、使用层重新标注：哪些只是证据，哪些应该写成页面，哪些问题要留给 query 检查。</p>
+</div>
+<h2 id="page-first-与双读者设计">05 Page-first 与双读者设计</h2>
+<div class="callout-question">
+<p>为什么不能把资料全丢给 embedding，还非要先写页面？</p>
+</div>
+<h3 id="page-first先有人能理解的页面再谈检索">Page-first：先有人能理解的页面，再谈检索</h3>
+<p>Page-first 的核心是：跨境业务知识要先整理成可命名、可链接、可维护的页面，再让系统围绕页面做检索和关系。</p>
+<p>这不是反对 chunk，也不是反对 embedding。它只是明确：业务知识的基本单位不应该是被机器切出来的片段，而应该是人和 Agent 都能理解的页面。</p>
+<p>一个 page 可以承载当前结论、关键证据、相关对象、决策原因、后续结果、未关闭问题和时间线。一个 chunk 通常只能承载一段材料。它可能有用，但很难单独解释业务脉络。</p>
+<div class="flow-diagram">
+<ol type="1">
+<li>先写稳定页面（结论、证据、链接、待跟进）</li>
+<li>页面之间用 wikilink 连接</li>
+<li>GBrain sync / embed / query</li>
+<li>Agent 在任务中按页面和关系调用上下文</li>
+</ol>
+</div>
+<h3 id="双读者设计同一套知识给人看也给-agent-用">双读者设计：同一套知识，给人看，也给 Agent 用</h3>
+<p>GBrain 不是替代人类阅读，也不是让团队把知识交给黑箱。更好的结构是：同一套 Markdown brain repo，既给人看，也给 Agent 用。</p>
+<div class="flow-diagram">
+<ol type="1">
+<li>Markdown brain repo（唯一知识源）</li>
+<li>→ Obsidian：人类阅读、编辑、backlinks、图谱、复盘</li>
+<li>→ GBrain：Agent 检索、typed links、timeline、query、MCP、维护</li>
+</ol>
+</div>
+<p>知识源只有一套，但使用方式有两种。人需要可读性、可编辑性、可追溯性。Agent 需要可检索、可连接、可调用、可维护。跨境电商不是纯工程系统——业务判断来自人的经验：产品定位、竞品直觉、渠道节奏、供应链风险。这些不能完全交给机器，也不能只留在人的脑子里。</p>
+<div class="callout-example">
+<p>运营在 Obsidian 里补充一次厨房收纳盒的流量复盘判断：“北美站核心关键词转化稳定，但竞品 B 开始低价冲量，暂不加预算。”GBrain 同步后，Agent 下周做流量复盘时能读到这条判断，并在建议里说明来由。</p>
+</div>
+<div class="callout-action">
+<p>不要问”Obsidian 和 GBrain 选哪个”。先问：我的 Markdown 知识源能不能同时让人维护、让 Agent 调用？先为一个产品写 3 个页面：产品主页、一个渠道复盘页、一个决策页。</p>
+</div>
+<h2 id="obsidian-的位置不是被替代而是被更好利用">06 Obsidian 的位置：不是被替代，而是被更好利用</h2>
+<div class="callout-question">
+<p>有了 GBrain，还需要 Obsidian 吗？</p>
+</div>
+<p>需要，而且更需要把它放对位置。</p>
+<p>先说最容易误会的一点：<strong>不要用 Obsidian 直接打开 GBrain 的工具仓库、数据库目录或 <code>.gbrain</code> 运行目录。</strong> Obsidian 应该打开的是你自己的 Markdown brain repo，也就是人类和 Agent 共同维护的知识源目录。</p>
+<p>正确关系不是 “Obsidian 打开 GBrain 底层数据库”，而是：</p>
+<div class="flow-diagram">
+<ol type="1">
+<li>Obsidian 打开 Markdown brain repo</li>
+<li>GBrain sync / embed 同一个 Markdown brain repo</li>
+<li>两者共享知识源，各司其职</li>
+</ol>
+</div>
+<p>Karpathy 在 LLM Wiki 原文里用了一个好比喻：Obsidian 像 IDE，LLM 像程序员，wiki 像代码库（来源：<a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">LLM Wiki</a>）。放到 GBrain 语境下：Obsidian 是人类维护台，GBrain 是 Agent 记忆运行层。</p>
+<p>Obsidian 的强项是人类体验：阅读 Markdown、编辑页面、看 backlinks、看局部图谱、做人工复盘、在页面之间自然跳转。在跨境业务里，它可以承担产品页的人工维护、复盘页的人工审核、竞品关系的手动链接、内容素材和关键词之间的关联、决策页的后续结果补充。</p>
+<h3 id="一个更安全的目录示例">一个更安全的目录示例</h3>
+<pre class="text"><code>seller-brain/                 # Obsidian 打开这里；GBrain sync 这里
+  products/
+  channels/
+  competitors/
+  reviews/
+  decisions/
+  sources/digests/
+  governance/
+
+gbrain-tool-or-runtime/        # 不作为 Obsidian vault
+  database/
+  cache/
+  runtime files/</code></pre>
+<p>如果团队把 GBrain 的运行目录当成 Obsidian vault，人类看到的不是清洁知识源，Agent 运行产生的索引和缓存也可能被误编辑。</p>
+<div class="callout-action">
+<p>确认你的 Obsidian vault 指向的是 Markdown brain repo，而不是 GBrain 的工具仓库或数据库目录。</p>
+</div>
+<h2 id="gbrain-的位置与理解门槛">07 GBrain 的位置与理解门槛</h2>
+<div class="callout-question">
+<p>GBrain 在 AI 第二大脑里到底做什么？对非技术团队来说，最大的难点是什么？</p>
+</div>
+<h3 id="gbrain-做什么agent-长期记忆层">GBrain 做什么：Agent 长期记忆层</h3>
+<p>GBrain 不替代 ERP，不替代飞书，不替代 Obsidian，也不替代业务判断。它让 Agent 能在任务中使用长期知识，重点处理六件事：</p>
+<ol type="1">
+<li>把 Markdown 页面纳入可检索系统；</li>
+<li>用 Hybrid Search（混合检索——同时用关键词匹配和语义理解两种方式找内容，就像你既按产品名搜，又按”上次为什么暂停”这种意思搜）；</li>
+<li>用 typed links 和 graph 表达对象关系；</li>
+<li>用 timeline 和 compiled truth 区分当前结论与历史变化；</li>
+<li>用 MCP / CLI 让 Agent 在真实工作流中调用；</li>
+<li>用 skillpack、recurring jobs 和维护流程，让 Agent 不只查知识，还能长期运营一套 brain。</li>
+</ol>
+<p>GBrain 仍在快速演进。2026 年 5 月的更新引入了 hot memory（热记忆层——在同步时实时提取事实，让最新信息更快进入 Agent 可用范围）和多种新的 embedding 方案（来源：<a href="https://x.com/garrytan/status/2054055071017538028">X 更新帖</a>）。这些特性不需要你立刻理解，但它说明 GBrain 不是一个写好就放着的项目，而是一个生产环境中持续迭代的系统。</p>
+<p>Agent 直接读文件夹也能工作，但文件多了以后找不到该看的页面、同义对象无法对齐、页面更新后索引不同步、关系只能靠模型猜、难以做 eval。GBrain 的意义，是把”读 Markdown”推进到”维护 Agent memory”。</p>
+<h3 id="难在哪里不是安装而是理解">难在哪里：不是安装，而是理解</h3>
+<p>很多人以为难点是工程化：数据库、pgvector、MCP、CLI。但对没有 AI 工程团队的跨境卖家来说，真正难的是理解 GBrain 的设计意图：</p>
+<ul>
+<li>为什么要 page-first，为什么要保留 Markdown；</li>
+<li>为什么不把所有原始资料都塞进去；</li>
+<li>为什么需要 source digest，为什么正式页要有 compiled truth；</li>
+<li>为什么时间线重要，为什么关系要写成 wikilink；</li>
+<li>为什么 sync/embed 后还要 eval。</li>
+</ul>
+<p>一旦理解这些，工程操作反而可以慢慢学、照文档做、让 Agent 辅助做。理解不到位，哪怕安装成功，也会把 GBrain 用成普通文件夹或搜索库。</p>
+<div class="callout-example">
+<p>一个团队把所有报表、截图、会议记录都倒进知识库，看起来资料很多，但 Agent 仍然答不出”上次为什么暂停厨房收纳盒的北美站预算”。因为它没有页面、关系、决策和时间线。当 Agent 被要求复盘一个渠道，它不应该只搜索”渠道复盘”几个字，而应该能按产品、渠道、竞品、供应链约束、历史决策一起召回。</p>
+</div>
+<div class="callout-action">
+<p>回答一个问题：你的 Agent 能不能说出上次暂停某个渠道预算的原因？如果不能，缺的不是工具安装，而是知识结构。</p>
+</div>
+<p>理解 GBrain 的设计意图是第一步。下一个实操问题是：你的业务记忆应该围绕哪些对象组织？跨境电商的知识不是散装的——它天然围绕产品、渠道、竞品、广告活动、决策这些核心对象展开。搞清楚”记什么”，才能开始搭建。</p>
+<div class="part-divider">
+<p>第四部分：跨境业务知识怎么建模</p>
+</div>
+<h2 id="跨境业务知识对象第二大脑到底记什么">08 跨境业务知识对象：第二大脑到底记什么</h2>
+<div class="callout-question">
+<p>跨境电商的 AI 第二大脑应该围绕哪些对象组织？</p>
+</div>
+<p>不要从文件夹开始，而要从业务对象开始。跨境电商的长期知识，通常围绕这些对象展开：</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>对象</th>
+<th>例子</th>
+<th>需要记录什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Product</td>
+<td>产品、变体、套装</td>
+<td>定位、卖点、限制、复盘</td>
+</tr>
+<tr>
+<td>Channel</td>
+<td>Amazon、独立站、TikTok、线下渠道</td>
+<td>流量结构、投放策略、渠道结果</td>
+</tr>
+<tr>
+<td>Keyword / Query</td>
+<td>搜索词、内容词、用户表达</td>
+<td>意图、转化、素材匹配</td>
+</tr>
+<tr>
+<td>Campaign</td>
+<td>广告活动、内容活动、促销活动</td>
+<td>目标、预算、动作、结果</td>
+</tr>
+<tr>
+<td>Competitor</td>
+<td>竞品、品牌、爆款链接</td>
+<td>定价、内容、Review、动作</td>
+</tr>
+<tr>
+<td>Supply Constraint</td>
+<td>库存、交期、成本、供应商问题</td>
+<td>对投放、定价、内容节奏的影响</td>
+</tr>
+<tr>
+<td>Content Asset</td>
+<td>图片、视频、A+、落地页、达人素材</td>
+<td>使用场景、表现、复用关系</td>
+</tr>
+<tr>
+<td>Decision</td>
+<td>决策</td>
+<td>背景、原因、动作、结果</td>
+</tr>
+<tr>
+<td>Review</td>
+<td>周复盘、月复盘、项目复盘</td>
+<td>事实、分析、开放问题</td>
+</tr>
+<tr>
+<td>SOP</td>
+<td>流程</td>
+<td>适用条件、步骤、例外</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-example">
+<p>一次厨房收纳盒的流量复盘不能只看广告活动，还要连接产品定位、内容素材、关键词、竞品 B 的降价动作和供应链约束。否则 Agent 只会给出”CPC 降了，可以加预算”这种不考虑约束的局部建议。</p>
+</div>
+<div class="callout-action">
+<p>打开你最近一次周会纪要，标注里面出现了哪些业务对象。你会发现大部分对话都在围绕上面这 10 类对象展开。</p>
+</div>
+<h2 id="正式页来源摘要页治理页不要把知识库写成文件夹">09 正式页、来源摘要页、治理页：不要把知识库写成文件夹</h2>
+<div class="callout-question">
+<p>页面应该分几层，才不会越写越乱？</p>
+</div>
+<p>一个常见错误，是把所有 Markdown 当成同一种东西：网页摘录、会议纪要、AI 总结、正式结论、治理规则全放在一起。短期很快，长期会让 Agent 分不清什么是证据、什么是观点、什么是已经确认的判断。</p>
+<p>更稳的做法，是至少分三层：</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>页面层</th>
+<th>作用</th>
+<th>写入要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>来源摘要页</td>
+<td>保存原始材料的压缩版</td>
+<td>说明来源、时间、材料范围，不直接冒充结论</td>
+</tr>
+<tr>
+<td>正式知识页</td>
+<td>保存经过确认的综合判断</td>
+<td>必须有 compiled truth、key links、evidence 或 timeline</td>
+</tr>
+<tr>
+<td>治理页</td>
+<td>规定命名、schema、resolver、写入边界</td>
+<td>更新要谨慎，因为会影响后续 Agent 行为</td>
+</tr>
+</tbody>
+</table>
+<p>Source digest 的价值是保存”这份来源材料提供了什么证据”，不应该直接变成业务结论。Formal page 保存的是经过人类确认、未来会复用的判断。Governance 规定系统怎么写——没有治理页，知识库越写越像个人笔记。</p>
+<div class="callout-example">
+<p>一份竞品 B 的季度观察报告，先变成 source digest（“竞品 B 在 Q1 降价 15%，主打低价策略”）；产品负责人确认后，才把”竞品 B 正在用低价锚定用户预期，我们暂不跟价”写进正式竞品页；治理页规定：竞品判断必须带来源日期和观察范围。</p>
+</div>
+<div class="callout-action">
+<p>给你的 brain repo 加三类目录：<code>sources/</code>、<code>topics/</code>、<code>governance/</code>。</p>
+</div>
+<h2 id="compiled-truth-timeline既要当前结论也要变化轨迹">10 Compiled Truth + Timeline：既要当前结论，也要变化轨迹</h2>
+<div class="callout-question">
+<p>为什么页面里既要写当前判断，又要写时间线？Ch10 和 Ch11 一起回答一个问题：一页好的知识页面应该有什么结构。</p>
+</div>
+<p>跨境业务判断会变化。一个渠道今天要收缩，下个月可能要恢复；一个竞品今天只是短期降价，后面可能改变价格带。</p>
+<p>如果页面只保存最新结论，Agent 看不到判断如何形成。如果只保存流水记录，Agent 又很难快速理解当前状态。所以页面至少需要两块：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Compiled Truth</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>当前最可信的判断是什么？</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>适用条件是什么？</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>下一次复核点是什么？</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Timeline</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2026-05-06：发生了什么。</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2026-05-13：做了什么决策。</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2026-05-20：后续结果怎样。</span></code></pre></div>
+<div class="callout-example">
+<p>厨房收纳盒的北美站渠道当前不继续放量——原因不是渠道失效，而是供应链交期仍超过 21 天。这写在 compiled truth。过去几次放量、暂停、恢复的时间和原因写进 timeline。</p>
+</div>
+<div class="callout-action">
+<p>把一个旧复盘页面改成 Compiled Truth + Timeline 两段，看看 Agent 是否更容易理解当前状态。</p>
+</div>
+<p>页面有了当前结论和时间线，但一页知识不能孤立存在——它需要和其他页面建立关系。Ch10 解决的是时间维度（当前结论 + 变化记录），下一章解决关系维度：链接、图谱、字段约定、别名对齐。</p>
+<h2 id="key-linksgraphschema-和-resolver">11 Key Links、Graph、Schema 和 Resolver</h2>
+<div class="callout-question">
+<p>为什么不能只靠模型自己理解业务关系？</p>
+</div>
+<p>因为业务关系太重要，不能全靠模型猜。</p>
+<p><strong>Key Links：关系要写出来。</strong> 每个重要页面都应该有 Key Links，标明关联的产品、渠道、竞品、决策和广告活动。这些链接让 Obsidian 能看，让人能跳转，也让 GBrain 能抽取关系。</p>
+<p><strong>Graph：关系要有类型。</strong> typed links 可以让关系更清晰——<code>决策 -&gt; 影响 -&gt; 广告活动</code>、<code>竞品 -&gt; 压力 -&gt; 产品定位</code>、<code>供应链约束 -&gt; 限制 -&gt; 渠道预算</code>。</p>
+<p><strong>Schema：页面要有最低结构。</strong> frontmatter（页面开头的结构化信息——就像每份报告封面上的项目名、日期、负责人）定义 type、product、channel、week、status 等字段。没有 schema，Agent 每次都要猜页面结构。</p>
+<p><strong>Resolver：同一对象要对齐。</strong> 同一个产品可能有内部名、SKU、平台商品 ID、渠道链接、供应商型号。Resolver 把这些别名映射到一个 canonical id。</p>
+<div class="callout-example">
+<p>厨房收纳盒在广告报告里叫 SKU-A001，在飞书里叫”厨收-基础款”，在供应链表里叫供应商型号 HG-201。没有 resolver，Agent 很容易把它拆成三个对象——业务记忆碎片化的起点。</p>
+</div>
+<p>一个最小的 <code>RESOLVER.md</code> 长这样：</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> canonical_id <span class="pp">|</span> aliases <span class="pp">|</span> type <span class="pp">|</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> product/kitchen-organizer-basic <span class="pp">|</span> SKU-A001, 厨收-基础款, HG-201 <span class="pp">|</span> product <span class="pp">|</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> product/kitchen-organizer-pro <span class="pp">|</span> SKU-A002, 厨收-升级款, HG-202 <span class="pp">|</span> product <span class="pp">|</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> channel/us-main <span class="pp">|</span> 北美站主账号, US-Store-1 <span class="pp">|</span> channel <span class="pp">|</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> competitor/brand-b <span class="pp">|</span> 竞品B, BrandB-US <span class="pp">|</span> competitor <span class="pp">|</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> campaign/us-kitchen-q2 <span class="pp">|</span> Q2北美厨收推广, Campaign-2026Q2-US <span class="pp">|</span> campaign <span class="pp">|</span></span></code></pre></div>
+<p>当 Agent 收到查询”厨收-基础款上次为什么暂停预算”时，它先查 RESOLVER 把”厨收-基础款”对齐到 <code>product/kitchen-organizer-basic</code>，再沿着这个 canonical id 找到关联的决策页和广告活动页。没有 resolver，Agent 用”厨收-基础款”搜索可能找不到以 SKU-A001 命名的广告报告——同一个东西，三个名字，三份孤立的记忆。</p>
+<div class="callout-action">
+<p>先写一个最小 <code>RESOLVER.md</code>，只处理你团队最常用的 10 个产品和渠道对象。</p>
+</div>
+<h2 id="skill-mcp-的能力边界">12 Skill + MCP 的能力边界</h2>
+<div class="callout-question">
+<p>既然有 Skill 和 MCP，为什么还需要 GBrain？</p>
+</div>
+<p>Skill 负责把方法固定下来——流量复盘怎么分析、竞品观察看哪些指标、哪些判断必须人工确认。MCP 负责连接工具——读取表格、查询文档、调用浏览器、连接内部系统。</p>
+<p>但 Skill 和 MCP 不天然沉淀长期判断。它们能让 Agent 做一次任务，却不能保证团队记住这次任务形成的业务结论。GBrain 补的是记忆层：过去判断是什么、证据是什么、后续结果怎样。这里说的记忆层有两种——团队的业务大脑和你个人的第二大脑。业务大脑是本书的主线，个人大脑在 Ch21-22 展开。</p>
+<p>没有记忆层，AI 工作流像一次性脚本；有了记忆层，复盘才会积累。</p>
+<div class="callout-example">
+<p>一个流量复盘 Skill 可以判断”北美站核心关键词是否值得继续投入”；GBrain 要记录”上次为什么保留它、后来结果怎样、这次是否仍适用”。</p>
+</div>
+<div class="callout-action">
+<p>把你已有的 Skill 分成两列：哪些是判断流程，哪些判断结果需要写入长期记忆？</p>
+</div>
+<p>Skill 和 MCP 解决执行，但判断结果谁来保管？下一章回答这个问题——GBrain 自带的 Skill 能力正是记忆层的维护机制。它不只是一个存储系统，还内建了一套保持记忆鲜活的工作流。</p>
+<h2 id="gbrain-的-skill-能力与团队工具分工">13 GBrain 的 Skill 能力与团队工具分工</h2>
+<div class="callout-question">
+<p>GBrain 自带这么多 skills，对卖家团队到底有什么用？飞书、Obsidian、GBrain、Codex、Skill、MCP 怎么放在一起？</p>
+</div>
+<h3 id="gbrain-skill-能力不是插件清单而是-agent-工作手册">GBrain Skill 能力：不是插件清单，而是 Agent 工作手册</h3>
+<p>不要把 GBrain 的 skills 理解成插件市场。GBrain 的 skillpack 更像 Agent 工作手册：什么时候该先查 brain，什么时候该摄取材料，什么时候该维护关系。官方 README 当前写到 34 个 skills，并由 <code>skills/RESOLVER.md</code> 组织路由（来源：<a href="https://github.com/garrytan/gbrain">GBrain README</a>）。Skillpack 文档也把它描述成生产级 Agent 使用 GBrain 的参考架构（来源：<a href="https://github.com/garrytan/gbrain/blob/master/docs/GBRAIN_SKILLPACK.md">GBRAIN_SKILLPACK.md</a>）。</p>
+<p>第一步不是”把所有 skills 都装上”，而是先理解五类能力层：</p>
+<p><strong>第一类：内容摄取。</strong> <code>ingest</code>、<code>media-ingest</code>、<code>meeting-ingestion</code>、<code>voice-note-ingest</code> 等解决”材料怎么进入 brain”。对跨境团队意味着：行业报告、竞品长文、平台政策、会议纪要不要只留在聊天记录或网盘里。<strong>适用条件</strong>：团队有复盘节奏，但材料散在各处。</p>
+<p><strong>第二类：研究与综合。</strong> <code>book-mirror</code>、<code>perplexity-research</code>、<code>strategic-reading</code> 等解决”Agent 怎么带着已有判断去读新材料”。读行业报告时，真正有价值的不是”这篇文章讲了什么”，而是”它会改变我们哪些业务判断”。<strong>适用条件</strong>：团队在看外部资料，但缺少映射回内部判断的流程。</p>
+<p><strong>第三类：Brain 运维。</strong> <code>maintain</code>、<code>citation-fixer</code>、<code>query</code>、<code>skillpack-check</code>、<code>smoke-test</code> 等解决”知识库会不会越用越乱”。跨境业务第二大脑最怕两件事：错结论被反复召回，旧页面没人维护。<strong>适用条件</strong>：团队已经开始写 formal page，出现 stale、断链、重复对象的问题。</p>
+<p><strong>第四类：团队运营。</strong> Skillpack 文档提到 recurring jobs、quiet hours、dream cycle、briefing 等操作纪律（来源：<a href="https://github.com/garrytan/gbrain/blob/master/docs/GBRAIN_SKILLPACK.md">GBRAIN_SKILLPACK.md</a>）。跨境场景里可以更朴素：周复盘前自动准备历史判断，月度竞品分析前检查旧结论。<strong>适用条件</strong>：从个人试点进入多人协作。</p>
+<p><strong>第五类：Skill 创建与检查。</strong> <code>skillpack install / diff / check</code>、<code>skill-creator</code>、<code>skillify</code> 等解决”哪些经验值得固化成流程”。一个好 skill 不只是提示词，而是带输入、判断、边界、输出和验收标准的工作流。<strong>适用条件</strong>：某类任务反复做，但每次口径不一致。</p>
+<p><strong>最小组合</strong>：个人试点先用 <code>query</code> + <code>ingest</code> + <code>media-ingest</code>；复盘 MVP 加 <code>maintain</code> + <code>citation-fixer</code>；研究增强加 <code>book-mirror</code>；流程固化加 <code>skill-creator</code>。</p>
+<h3 id="团队工具分工">团队工具分工</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>工具</th>
+<th>负责什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>协作层</td>
+<td>飞书 / 任务系统</td>
+<td>会议、任务、审批、团队同步</td>
+</tr>
+<tr>
+<td>人类知识层</td>
+<td>Obsidian</td>
+<td>阅读、编辑、backlinks、图谱、人工复盘</td>
+</tr>
+<tr>
+<td>共享知识源</td>
+<td>Markdown brain repo</td>
+<td>人和 Agent 共用的页面源</td>
+</tr>
+<tr>
+<td>Agent 记忆层</td>
+<td>GBrain</td>
+<td>query、typed links、timeline、MCP、维护循环</td>
+</tr>
+<tr>
+<td>执行层</td>
+<td>Codex / Skill / MCP</td>
+<td>数据处理、业务判断、工具调用</td>
+</tr>
+<tr>
+<td>自动化层</td>
+<td>OpenClaw / 定时任务</td>
+<td>周期流程、巡检、提醒</td>
+</tr>
+</tbody>
+</table>
+<p>关键：飞书不是长期记忆，Obsidian 不是 Agent 服务端，GBrain 不是团队前台，Skill 不是知识库。</p>
+<div class="callout-action">
+<p>列出你团队最常做的 3 类 AI 任务，每一类只回答一个问题：它现在缺的是材料摄取、研究综合、brain 运维、团队运营，还是 skill 固化？然后画出你团队的工具分层图。</p>
+</div>
+<div class="part-divider">
+<p>第五部分：实战路线</p>
+</div>
+<h2 id="从-20-条低风险知识样本开始">14 从 20 条低风险知识样本开始</h2>
+<div class="callout-question">
+<p>第一批知识从哪里来？为什么不是把历史资料全搬进去？</p>
+</div>
+<p>从这一章开始，我们先聚焦业务大脑的搭建——团队共享的长期记忆系统。个人大脑的实操指南在 Ch22。</p>
+<p>不要从搬运全部历史资料开始，也不要把复杂业务数据直接塞给 GBrain。GBrain 不会天然理解你的业务术语、渠道结构、产品命名和成本约束。第一步不是”喂数据”，而是先给它一批低风险、可读、脱敏、结构清楚的知识样本。</p>
+<h3 id="第一步先做业务术语表">第一步：先做业务术语表</h3>
+<p>先写一页最小术语表，不超过 30 个词。从这些对象开始：产品、渠道、关键词、竞品、成本、供应链、决策字段、复盘状态。每个词只写三件事：它是什么，它有哪些常见别名，它会和哪些对象发生关系。</p>
+<h3 id="第二步再整理-20-条低风险样本">第二步：再整理 20 条低风险样本</h3>
+<p>建议结构：</p>
+<ul>
+<li>5 条术语解释；</li>
+<li>5 条流量复盘；</li>
+<li>4 条竞品观察；</li>
+<li>3 条约束记录；</li>
+<li>3 条决策结果回看。</li>
+</ul>
+<p>每条样本只回答四个问题：它涉及哪个对象？当时的判断是什么？它和哪些对象有关？后来有没有结果或待验证问题？如果结果还不知道，就写进 Open Threads。不要假装已经有结论。</p>
+<h3 id="第三步最后才-sync-embed-query">第三步：最后才 sync / embed / query</h3>
+<p>等术语表和 20 条样本都能被人读懂，再接入 GBrain 做 sync / embed / query。第一轮不追求自动决策，只问 10 个验证问题：</p>
+<ul>
+<li>厨房收纳盒关联过哪些渠道判断？</li>
+<li>竞品 B 影响过哪些内容判断？</li>
+<li>某次预算暂停和哪些约束有关？</li>
+<li>哪些结论还没有结果回看？</li>
+<li>哪些页面缺少来源或链接？</li>
+</ul>
+<p>如果这些问题都答不出来，问题通常不在 GBrain，而在样本没有写清对象、关系和时间线。</p>
+<div class="callout-action">
+<p>用 1 小时写一页业务术语表，再整理 20 条低风险样本。每条不超过 150 字，明确对象、判断、关系、时间线。</p>
+</div>
+<p>写完第一批样本后你可能会想：“我写的对不对？别人的样本长什么样？”欢迎通过「Zach的进化笔记」公众号加微信群直接交流，不需要任何付费门槛。如果你还想看更多卖家的实操案例和踩坑记录，知识星球里有持续的真实讨论——不是教程，是大家在落地过程中一起摸索。</p>
+<h2 id="最小-markdown-brain-repo">15 最小 Markdown brain repo</h2>
+<div class="callout-question">
+<p>目录怎么搭，才能同时给人和 Agent 用？</p>
+</div>
+<p>第一版不要复杂。先搭一个能被 Obsidian 打开，也能被 GBrain import / sync 的 Markdown repo。</p>
+<pre class="text"><code>seller-brain/
+  README.md
+  schema.md
+  RESOLVER.md
+  products/
+  channels/
+  competitors/
+  campaigns/
+  content-assets/
+  reviews/
+  decisions/
+  sources/
+    raw/
+    digests/
+  governance/
+  inbox/
+  archive/</code></pre>
+<p>README 要写清用途：这个 repo 存储跨境业务的长期记忆，人在 Obsidian 里读和编辑，Agent 通过 GBrain 检索和调用。</p>
+<p>schema.md 先定义 5 类页面就够：product（产品主页）、channel（渠道主页）、competitor（竞品主页）、business_review（业务复盘页）、decision（决策页）。</p>
+<p>RESOLVER.md 先处理最常见的 10 个产品、渠道、竞品，不要一开始追求完整。</p>
+<div class="callout-action">
+<p>建一个最小 repo，只写 5 个页面：1 个产品、1 个渠道、1 个竞品、1 个复盘、1 个决策。能被人读懂就算成功。</p>
+</div>
+<h2 id="跨境业务复盘-mvp先聚焦广告与流量">16 跨境业务复盘 MVP：先聚焦广告与流量</h2>
+<div class="callout-question">
+<p>第一个 MVP 应该选什么场景？</p>
+</div>
+<p>第一个场景建议选广告与流量复盘。原因很简单：它高频、有数据、有动作、有结果，也天然连接产品、关键词、内容、竞品和供应链。先跑通一个产品 + 一个主要渠道即可。</p>
+<p><strong>输入</strong>：流量或广告表现、产品当前状态、关键词、主要竞品变化、供应链或成本约束、历史复盘页、历史决策页。</p>
+<p><strong>处理</strong>：Codex / 脚本清洗数据 → Skill 按业务规则判断 → GBrain 召回历史判断 → Agent 生成复盘草稿 → 人类确认关键结论。</p>
+<p><strong>输出</strong>：复盘页（<code>reviews/YYYY-WW-traffic-review-*.md</code>）、决策页、飞书待办、Open Threads 列表。</p>
+<p><strong>最小判断问题</strong>：哪些流量动作有效？哪些动作受供应链或成本限制？哪些关键词值得继续观察？哪些竞品变化影响判断？哪些结论需要人类复核？</p>
+<div class="callout-example">
+<p>Agent 发现厨房收纳盒的北美站转化变好，但 GBrain 召回历史页面显示：该产品库存覆盖不足 21 天，且上次放量导致交付风险上升。于是复盘建议不是”继续放量”，而是”保留核心流量，库存恢复后复核”。</p>
+</div>
+<div class="callout-action">
+<p>选一个产品和一个渠道，跑一次流量复盘 MVP。目标不是优化所有业务，而是验证第二大脑能不能召回旧判断。</p>
+</div>
+<h2 id="第二场景竞品分析">17 第二场景：竞品分析</h2>
+<div class="callout-question">
+<p>除了广告流量，第二个适合进入 GBrain 的场景是什么？</p>
+</div>
+<p>第二个场景建议选竞品分析。主角是竞品，产品只是被影响对象。这样写，Agent 更容易判断哪些变化属于竞品页，哪些应该回流到产品页、内容页或决策页。</p>
+<p>竞品分析关注：竞品价格带是否变化、核心卖点是否被模仿、内容表达有没有变化、Review 中的新问题是否影响我们的话术、上次竞品判断有没有结果回看。</p>
+<p>竞品页不要写成”竞品资料收藏夹”。它至少要有四层：当前判断（这个竞品现在对我们意味着什么）、关键证据（价格、内容、Review、投放）、影响对象（关联哪些产品、渠道、内容素材）、Open Threads（哪些变化还需要继续观察）。</p>
+<div class="callout-example">
+<p>竞品 B 突然在北美站低价上量，Agent 不能只建议降价。它应该先查竞品页、关联产品页、历史价格判断、内容素材效果和利润约束，再提出”跟价、强化差异化、调整内容表达、暂不响应”中的哪一种。</p>
+</div>
+<div class="callout-action">
+<p>为你最关注的一个竞品写一页 formal page，至少包含当前判断、关键证据、影响对象、后续观察项。</p>
+</div>
+<p>你现在有了两个实战场景的页面——流量复盘和竞品分析。但写在本地 Markdown 里的知识，Agent 还用不上。下一步是让这些知识真正进入 Agent 的工作流，从”人写了”变成”Agent 能查到、能用上”。</p>
+<h2 id="让知识进入-agent-工作流">18 让知识进入 Agent 工作流</h2>
+<div class="callout-question">
+<p>页面写好了，Agent 怎么真正用上？团队日常怎么跑？</p>
+</div>
+<h3 id="sync-embed-query-mcp">sync / embed / query / MCP</h3>
+<p>GBrain 的接入流程可以理解成四步：</p>
+<div class="flow-diagram">
+<ol type="1">
+<li>sync：把 Markdown 页面同步到 GBrain</li>
+<li>embed：让更新后的页面进入检索索引</li>
+<li>query：让 Agent 或人查询长期记忆</li>
+<li>MCP：把 GBrain 接入实际 Agent 工作流</li>
+</ol>
+</div>
+<p>用实际命令走一遍这四步（命令格式可能随 GBrain 版本变化，以官方文档为准——但核心四步逻辑是稳定的）：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 同步本地 Markdown 到 GBrain</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gbrain</span> sync ./seller-brain</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># → Synced 47 pages (3 new, 2 updated, 42 unchanged)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 为新增/更新页面生成向量索引</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">gbrain</span> embed <span class="at">--stale</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># → Embedded 5 pages (3 new, 2 re-embedded)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 验证 Agent 能否召回关键判断</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">gbrain</span> query <span class="st">&quot;上次为什么暂停厨房收纳盒的北美站预算？&quot;</span> <span class="at">--no-expand</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># → Found: decisions/2026-q1-kitchen-budget-pause</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   Compiled Truth: 因库存周期不确定性暂停，等供应链确认后恢复</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   Key Links: product/kitchen-organizer-basic, channel/us-main</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   Timeline: 2026-03-15 暂停 → 2026-04-02 供应链确认 → 2026-04-05 恢复</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 通过 MCP 让 Agent 在任务中调用</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Claude Code / Cursor 中 GBrain MCP 已自动加载，Agent 可直接查询</span></span></code></pre></div>
+<p>Obsidian 编辑的是 Markdown 源，GBrain 需要知道哪些页面更新了（sync）。页面更新后，向量索引也要更新（embed），否则人看到新页面，Agent 找到的可能还是旧内容。query 是检查 GBrain 是否真的能召回判断的入口——不要只问泛问题，要带对象和任务。MCP 让 Agent 在任务中调用 GBrain，而不是人手动复制页面。</p>
+<h3 id="团队协作链路">团队协作链路</h3>
+<p>一个实际可用的日常流程：</p>
+<div class="flow-diagram">
+<ol type="1">
+<li>飞书发起复盘任务</li>
+<li>Codex 读取报表和资料</li>
+<li>Skill 执行业务判断流程</li>
+<li>GBrain 召回历史判断</li>
+<li>Agent 生成复盘草稿</li>
+<li>人类审核关键结论</li>
+<li>Markdown brain repo 写入正式页</li>
+<li>Obsidian 人工阅读和补链接</li>
+<li>飞书回流待办</li>
+</ol>
+</div>
+<p>飞书回流不要太重——只承接本周确认动作、需要审批的动作、下周观察项、负责人、截止时间和对应知识页标题。不要把整篇知识页塞回飞书。</p>
+<div class="callout-action">
+<p>每次编辑后至少跑 3 个 query，确认 Agent 找到的是最新判断。然后设计一个不超过 6 个字段的飞书回流模板。</p>
+</div>
+<h2 id="轻量-eval怎么知道第二大脑真的有用">19 轻量 eval：怎么知道第二大脑真的有用</h2>
+<div class="callout-question">
+<p>怎么判断 GBrain 不是写得热闹，而是真的能用？</p>
+</div>
+<p>要做 eval。第一版不需要复杂，先用 10 个问题检查能不能召回、解释、引用、更新。</p>
+<p>建议问题：</p>
+<ol type="1">
+<li>厨房收纳盒最近一次暂停渠道预算的原因是什么？</li>
+<li>哪些复盘结论受到供应链约束影响？</li>
+<li>哪个竞品最近改变了我们的产品判断？</li>
+<li>哪些内容素材被证明有效？</li>
+<li>哪些决策没有后续结果？</li>
+<li>哪些页面缺 Key Links？</li>
+<li>哪些 Open Threads 超过两周未关闭？</li>
+<li>哪些结论需要人工复核？</li>
+<li>哪些页面的 compiled truth 和 timeline 冲突？</li>
+<li>哪些模型推断还没有来源支持？</li>
+</ol>
+<p>记录错误类型：没搜到、搜到但对象错、结论过期、缺证据、把推断当事实、引用不完整、没有提出复核问题。</p>
+<div class="callout-action">
+<p>建一个 <code>evals/business-review-questions.md</code>，每周用同一批问题抽查。</p>
+</div>
+<h3 id="从手动到半自动">从手动到半自动</h3>
+<p>每周手动跑 10 个问题是起点，但人会忘、会跳过。把 eval 变成一个简单脚本，每周花 5 分钟确认大脑没退化：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># evals/run-eval.sh — 最小 eval 脚本</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">questions</span><span class="op">=</span><span class="va">(</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;厨房收纳盒最近一次暂停渠道预算的原因是什么？&quot;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;哪些复盘结论受到供应链约束影响？&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;哪个竞品最近改变了我们的产品判断？&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="va">)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> q <span class="kw">in</span> <span class="st">&quot;</span><span class="va">${questions</span><span class="op">[@]</span><span class="va">}</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;--- Q: </span><span class="va">$q</span><span class="st">&quot;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">gbrain</span> query <span class="st">&quot;</span><span class="va">$q</span><span class="st">&quot;</span> <span class="at">--no-expand</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-5</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>跑完后人工看一遍输出：能召回的打 ✅，召回错误的标记错误类型。这不是工业级 eval 框架，而是”最小验证习惯”——目标是让 eval 从”知道应该做”变成”每周真的做了”。</p>
+<p>跑完第一轮 eval 后你会发现：10 个问题不够用，而且不同业务的问题差别很大。我自己的 eval 问题库也在持续扩展。如果你也在做这件事，「Zach的进化笔记」知识星球里有更多卖家的真实业务问题——比起一个人闭门造车，更多人的真实场景能让 eval 更有代表性。</p>
+<h2 id="企业级使用-gbrain从个人-brain-到团队-agent-记忆层">20 企业级使用 GBrain：从个人 brain 到团队 Agent 记忆层</h2>
+<div class="callout-question">
+<p>一个人能用 GBrain，团队怎么用才不乱？</p>
+</div>
+<p>企业级不是把个人 brain 直接共享给所有人，而是先把个人可用的 Agent Brain，逐步升级成团队可查询、可审计、可维护的 Agent 记忆层。</p>
+<h3 id="企业级价值">企业级价值</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>价值</th>
+<th>解决什么问题</th>
+<th>跨境业务里是什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>共享业务记忆</td>
+<td>判断不只留在个人聊天和脑子里</td>
+<td>新负责人接手时能查到过去复盘</td>
+</tr>
+<tr>
+<td>决策可追溯</td>
+<td>知道为什么做过某个动作</td>
+<td>预算、内容、渠道判断有来源和时间线</td>
+</tr>
+<tr>
+<td>新成员 / 新 Agent onboarding</td>
+<td>新人和新 Agent 不从零开始</td>
+<td>先读产品页、竞品页、复盘页、决策页</td>
+</tr>
+<tr>
+<td>跨工具一致性</td>
+<td>不同入口看同一套知识</td>
+<td>飞书、Obsidian、Codex、Agent 查同一套 formal page</td>
+</tr>
+<tr>
+<td>权限和审计</td>
+<td>知道谁能读、谁能写、谁调用过</td>
+<td>读写分权，关键请求保留 request log</td>
+</tr>
+</tbody>
+</table>
+<h3 id="落地路径五步走">落地路径：五步走</h3>
+<p><strong>第一步：个人试点。</strong> 先用本地 Markdown brain repo 跑通 20 条低风险样本、10 个 eval 问题和一个复盘 MVP。只验证 Agent 能不能召回对象、关系、判断和时间线。</p>
+<p><strong>第二步：小团队只读查询。</strong> 让运营负责人、业务负责人或外部 Agent 先只读查询。只读阶段暴露 formal page 和 eval 结果，不开放随意写入。目标是建立信任。</p>
+<p><strong>第三步：负责人写入。</strong> 普通成员提交来源摘要或复盘草稿，负责人确认后再写入 formal page。减少幻觉写入和口径污染。</p>
+<p><strong>第四步：定期维护和 eval。</strong> 每周固定跑 query / eval / maintain，检查 stale 页面、断链、缺 citation、Open Threads 超期和命名冲突。</p>
+<p><strong>第五步：企业治理。</strong> 明确 schema、resolver、读写权限、审计保留、敏感信息边界和退出机制。企业级不是功能更多，而是出错时能追责、能修复、能降级。</p>
+<h3 id="remote-mcp从个人用到团队用">Remote MCP：从个人用到团队用</h3>
+<h4 id="给决策者的三个判断">给决策者的三个判断</h4>
+<p><strong>什么时候从个人用切换到团队用？</strong> 当超过一个人需要查询业务大脑时。标志通常是：运营同事开始问你”上次那个判断在哪里”，或者你发现自己在复制粘贴 GBrain 的查询结果给别人。GBrain 已经在 multiplayer 场景中被使用——Garry Tan 确认他的 7 人团队正在用 GBrain 的多人模式，并且支持 federated repos（联邦仓库），可以让个人仓库和工作仓库并存（来源：<a href="https://x.com/garrytan/status/2055884666264269177">X 回复</a>）。</p>
+<p><strong>持续成本是什么？</strong> 技术成本很低——GBrain 自带团队接入能力，不需要额外采购。真正的成本是管理成本：谁负责维护页面质量，谁审核写入，谁处理权限申请。</p>
+<p><strong>需要给技术人员什么要求？</strong> 三条底线：每个人和每个工具用独立的访问凭据（不共享密码）、默认只给查看权限（写入需要审批）、人员变动时及时撤销权限。</p>
+<h4 id="给执行者的配置参考">给执行者的配置参考</h4>
+<p>本地单人使用时，<code>gbrain serve</code> 通过本地直连方式（stdio）给 Claude Code、Cursor 等工具调用。团队或远程工具接入时，官方 README 提到 <code>gbrain serve --http</code> 可以启动 Remote MCP，带 OAuth 2.1、admin dashboard、scopes、request log 等能力（来源：<a href="https://github.com/garrytan/gbrain">GBrain README</a>）。</p>
+<p>最小操作逻辑：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gbrain</span> serve <span class="at">--http</span> <span class="at">--port</span> 3131</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> http://localhost:3131/admin</span></code></pre></div>
+<p>然后在 admin dashboard 里注册 client、选择 scopes、保存凭据。不要把”开一个 MCP key 给大家用”理解成群共享密码。更安全的做法：</p>
+<ul>
+<li>按成员或工具注册独立 client / token；</li>
+<li>默认只给 <code>read</code>；</li>
+<li><code>write</code> 只给负责维护 formal page 的角色；</li>
+<li><code>admin</code> 只给系统维护者；</li>
+<li>成员离开、工具废弃时及时 revoke；</li>
+<li>不把 token 写进 Markdown、飞书文档或公开仓库。</li>
+</ul>
+<p>如果使用旧式 bearer token，GBrain Security 文档给出 <code>gbrain auth create / list / revoke / test</code> 的管理方式，token 明文只在创建时显示一次（来源：<a href="https://github.com/garrytan/gbrain/blob/master/SECURITY.md">SECURITY.md</a>）。</p>
+<h3 id="权限设计默认-read谨慎-write">权限设计：默认 read，谨慎 write</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>角色</th>
+<th>建议权限</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>普通运营成员</td>
+<td>read</td>
+<td>查历史、查复盘、查术语</td>
+</tr>
+<tr>
+<td>业务负责人</td>
+<td>read + limited write</td>
+<td>确认复盘和决策后写入</td>
+</tr>
+<tr>
+<td>Agent 执行工具</td>
+<td>read 优先，write 需单独批准</td>
+<td>防止自动写入污染正式页</td>
+</tr>
+<tr>
+<td>系统维护者</td>
+<td>admin</td>
+<td>管理 client、token、schema、维护任务</td>
+</tr>
+</tbody>
+</table>
+<h3 id="安全边界">安全边界</h3>
+<p>公开 Security 文档提醒：不要开放未认证的 OAuth client registration，否则发现服务器地址的人可能注册 client、拿到 token、访问 brain 数据。文档还建议限制 scopes、记录 token 签发、对注册和 token 端点做 rate limit（来源：<a href="https://github.com/garrytan/gbrain/blob/master/SECURITY.md">SECURITY.md</a>）。</p>
+<p>生产环境至少保留四个默认动作：审计（保留 request log）、限流（IP / token 维度 rate limit）、脱敏（request log 默认保留 redacted params）、撤销（每个成员和工具都有独立 token，可单独 revoke）。</p>
+<div class="callout-action">
+<p>写一页 <code>ACCESS_POLICY.md</code> 草案，只定义四件事：谁能读、谁能写、谁能管理、出问题如何 revoke。</p>
+</div>
+<p>企业级解决的是团队协作问题——多人怎么共享一个业务大脑。但还有一个更个人的问题：你和 Agent 之间的长期关系，需要另一个大脑来承载。前言中的第五条判断在这里展开。</p>
+<h2 id="为什么你需要两个大脑业务大脑与个人大脑">21 为什么你需要两个大脑：业务大脑与个人大脑</h2>
+<div class="callout-question">
+<p>公司的业务判断和个人的 AI 增强，应该放在同一个 brain 里吗？</p>
+</div>
+<p>不应该。业务大脑和个人大脑解决的是两个不同层面的问题，混在一起会带来权限混乱、噪声干扰，甚至离职时无法干净分离。</p>
+<h3 id="一个-brain-为什么不够用">一个 brain 为什么不够用</h3>
+<p>业务 brain 是团队资产。它存放的是产品、竞品、复盘、决策——这些信息属于公司，服务公司所有 Agent 和团队成员。Ch20 讲的企业级接入（Remote MCP、OAuth、权限分层）就是为这一层设计的。</p>
+<p>个人 brain 是你自己的 AI 增强。它存放的是你的判断习惯、工作偏好、过往认知积累和跨模型的记忆——这些信息属于你个人，不管你在哪家公司、用哪个模型，它都应该跟着你走。</p>
+<p>如果把两者混在一起：团队成员能看到你的个人偏好，你的个人笔记污染业务 brain 的信噪比，换工作时你要么带走公司数据、要么丢掉自己的积累。分开是更干净的架构。</p>
+<p>这不只是我们的理论推导——GBrain 原生支持这种分离。Garry Tan 确认 GBrain 支持 federated repos（联邦仓库），可以让个人仓库和工作仓库在同一套系统中并存，也可以通过多个 <code>GBRAIN_HOME</code> 实例实现完全隔离（来源：<a href="https://x.com/garrytan/status/2055884666264269177">X 回复</a>）。换句话说，双脑架构不是对 GBrain 的额外改造，而是它设计中已经考虑到的使用方式。</p>
+<h3 id="真实痛点跨模型记忆散乱">真实痛点：跨模型记忆散乱</h3>
+<p>你可能同时在用 Claude、ChatGPT、Gemini、Cursor——每个模型只记得跟它自己聊过的内容。</p>
+<p>上周你在 Claude 里花了两个小时梳理北美站竞品格局，形成了一系列判断。这周你换到 ChatGPT 问同一个问题，它完全不知道你上周的结论。你不得不从头解释。不是因为 ChatGPT 不够好，而是你的判断被锁在了 Claude 的对话历史里。</p>
+<p>个人 brain 解决的就是这件事：把你跨模型的判断沉淀到一个 Agent 都能读的外部知识层。不管你今天用哪个模型，它都能读到你之前的结论、你的工作偏好、你的决策习惯。</p>
+<p>附带一个好处：当模型账号出现迁移、降级甚至封号的情况时，你积累的上下文和记忆不会随之消失——因为它们从一开始就没有存在模型里。</p>
+<h3 id="gbrain_home一个环境变量实现双实例隔离">GBRAIN_HOME：一个环境变量实现双实例隔离</h3>
+<p>GBrain 通过 <code>GBRAIN_HOME</code> 环境变量指向不同的数据目录。每个实例有独立的 PGLite（GBrain 内置的轻量数据库，你不需要单独安装或管理）数据库、embedding 索引和 page 体系。你不需要安装两套软件，只需要两个目录：</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 业务大脑</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GBRAIN_HOME</span><span class="op">=</span>~/brain-business</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">gbrain</span> stats</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 个人大脑</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GBRAIN_HOME</span><span class="op">=</span>~/brain-personal</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">gbrain</span> stats</span></code></pre></div>
+<p>可以为每个实例写一个简单的 shell 包装脚本，避免每次手动设置环境变量：</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ~/bin/gbrain-personal</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GBRAIN_HOME</span><span class="op">=</span>~/brain-personal</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> gbrain <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span></span></code></pre></div>
+<p>两个实例各自独立运行 <code>sync</code>、<code>embed</code>、<code>query</code>，互不干扰。</p>
+<h3 id="双脑分工表">双脑分工表</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>维度</th>
+<th>业务大脑</th>
+<th>个人大脑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>归属</td>
+<td>团队 / 公司</td>
+<td>你自己</td>
+</tr>
+<tr>
+<td>接入方式</td>
+<td>Remote MCP + OAuth</td>
+<td>本地 stdio</td>
+</tr>
+<tr>
+<td>典型内容</td>
+<td>产品页、竞品页、复盘、决策、术语表</td>
+<td>个人画像、工作偏好、跨模型记忆、学习笔记</td>
+</tr>
+<tr>
+<td>权限管理</td>
+<td>read / write / admin 分层</td>
+<td>不需要权限管理</td>
+</tr>
+<tr>
+<td>团队可见性</td>
+<td>所有授权成员和 Agent 可查</td>
+<td>仅你自己</td>
+</tr>
+<tr>
+<td>换公司时</td>
+<td>留在公司</td>
+<td>跟你走</td>
+</tr>
+<tr>
+<td>主要价值</td>
+<td>组织记忆不随人员流动丢失</td>
+<td>个人 AI 增强不被锁在某个模型里</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-action">
+<p>列出你目前跨模型使用时最常重复解释给 AI 的三件事——你的角色、你的行业背景、你的工具链偏好。这就是个人 brain 的第一批内容。</p>
+</div>
+<h2 id="个人大脑实操指南从目录到跨模型迁移">22 个人大脑实操指南：从目录到跨模型迁移</h2>
+<div class="callout-question">
+<p>个人大脑的目录怎么建、画像页怎么写、怎么让所有模型都读到？</p>
+</div>
+<h3 id="个人-brain-的目录结构">个人 brain 的目录结构</h3>
+<p>建议从三个目录开始：</p>
+<pre><code>personal-brain/
+├── profile/          ← 个人画像、工作偏好、沟通风格
+├── knowledge/        ← 跨模型沉淀的判断和学习笔记
+├── decisions/        ← 重要个人决策和复盘
+├── schema.md         ← 页面类型和字段定义
+└── RESOLVER.md       ← 命名和写入规则</code></pre>
+<p>和 Ch15 的业务 brain 做个对比：</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>维度</th>
+<th>业务 brain 目录</th>
+<th>个人 brain 目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心目录</td>
+<td><code>topics/</code>、<code>sources/</code>、<code>governance/</code></td>
+<td><code>profile/</code>、<code>knowledge/</code>、<code>decisions/</code></td>
+</tr>
+<tr>
+<td>schema 重点</td>
+<td>产品、竞品、复盘、决策</td>
+<td>个人画像、偏好、学习笔记</td>
+</tr>
+<tr>
+<td>页面数量</td>
+<td>几十到几百页</td>
+<td>起步 5-10 页</td>
+</tr>
+<tr>
+<td>维护频率</td>
+<td>团队定期维护</td>
+<td>个人随时更新</td>
+</tr>
+</tbody>
+</table>
+<h3 id="个人画像页的-schema-设计">个人画像页的 schema 设计</h3>
+<p>画像页是个人 brain 最核心的页面。它告诉 Agent”你是谁”，让每次对话不从零开始。</p>
+<p>建议 frontmatter：</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> personal_profile</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">owner</span><span class="kw">:</span><span class="at"> your-name</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">status</span><span class="kw">:</span><span class="at"> active</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">last_updated</span><span class="kw">:</span><span class="at"> 2026-05-15</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tags</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">profile</span><span class="kw">,</span><span class="at"> core</span><span class="kw">]</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>正文结构建议分五个区块：</p>
+<ol type="1">
+<li><strong>角色与背景</strong>：你做什么、在什么行业、什么阶段</li>
+<li><strong>工作偏好</strong>：沟通风格（直接还是铺垫）、决策习惯（数据驱动还是直觉优先）、常用工具链</li>
+<li><strong>当前关注领域</strong>：最近 3 个月的工作重心</li>
+<li><strong>AI 使用习惯</strong>：你期望 AI 怎么跟你协作——先给结论还是先分析？需要多方案还是直接推荐？</li>
+<li><strong>不需要重复解释的上下文</strong>：你的行业常识、团队术语、过往已经定下的判断</li>
+</ol>
+<h3 id="画像页怎么写才能让-agent-真正用上">画像页怎么写才能让 Agent 真正用上</h3>
+<p>画像页不是简历，是”你希望 AI 在下次对话开始前就知道的事”。</p>
+<p>写的时候区分两类信息：</p>
+<ul>
+<li><strong>事实</strong>：你的角色、行业、工具链、团队规模。这些不常变。</li>
+<li><strong>偏好</strong>：你喜欢什么样的输出格式、什么时候需要详细分析、什么时候只要结论。这些会随着你和 AI 的协作经验演变。</li>
+</ul>
+<p>一个虚构的跨境电商运营负责人画像页示例：</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 个人画像：运营负责人</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 角色与背景</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>跨境电商公司运营负责人，负责北美站和欧洲站。团队 5 人。</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>主要品类：家居收纳。3 条产品线，年营收 500 万美元量级。</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工作偏好</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>沟通风格：直接给结论，再展开分析。不需要铺垫和背景介绍。</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>决策习惯：数据优先，但最终靠业务判断拍板，不迷信模型。</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>工具链：飞书（团队协作）+ Obsidian（个人笔记）+ Claude Code（AI 主力）+ ChatGPT（补充验证）。</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 当前关注</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>北美站厨房收纳盒的利润率下降，需要判断是竞品低价冲量还是品类天花板。</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>欧洲站合规成本上升，评估是否缩减 SKU。</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## AI 使用习惯</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>分析报告先给结论和建议，数据支撑放后面。</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>提供多方案时必须给出每个方案的优缺点和推荐理由。</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>不需要解释基础亚马逊运营概念（ACOS、TACOS、BSR 等）。</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 不需要重复解释的上下文</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>&quot;库存覆盖不足 21 天时暂停放量&quot;是团队已确认的规则。</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>供应商交期通常 45-60 天，海运 25-35 天。</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>广告预算按月度分配，不做日维度微调。</span></code></pre></div>
+<p>画像页应该定期更新。建议每月回顾一次：关注领域变了吗？偏好变了吗？有没有新的”不需要重复解释的上下文”？</p>
+<h3 id="跨模型接入让-claudechatgptcursor-都读同一个-brain">跨模型接入：让 Claude、ChatGPT、Cursor 都读同一个 brain</h3>
+<p>个人 brain 的核心价值在于跨模型可用。不同工具的接入方式不同：</p>
+<p><strong>Claude Code（原生 MCP）</strong>：直接在 MCP 配置中指定个人 brain 的 <code>GBRAIN_HOME</code>，<code>gbrain serve</code> 通过 stdio 接入。Agent 在对话中自动查询个人 brain。</p>
+<p><strong>其他支持 MCP 的工具</strong>（Cursor、Windsurf 等）：用 <code>gbrain serve --http --port 3132</code> 启动本地 HTTP 服务。注意：个人 brain 在本地运行，不需要走团队的 Remote MCP 和 OAuth——它只服务你自己。</p>
+<p><strong>不支持 MCP 的模型</strong>（ChatGPT 网页版、Gemini 等）：降级方案。用 <code>gbrain query "我的画像和工作偏好" --no-expand</code> 导出相关页面内容，粘贴到对话开头作为上下文。不如 MCP 自动化，但至少不需要每次手动重复。</p>
+<p>关键原则：个人 brain 永远在本地。它的数据不走公网、不需要 OAuth、不需要权限管理。你的画像和偏好只有你自己能读。</p>
+<h3 id="跨模型迁移清单">跨模型迁移清单</h3>
+<p>如果你已经在某些模型里积累了记忆和偏好，可以迁移到个人 brain：</p>
+<p><strong>从 ChatGPT Memory 迁移</strong>： 1. 在 ChatGPT 设置中导出 Memory 内容（Settings → Personalization → Memory → Manage → Export） 2. 整理成 Markdown page：事实类信息写入画像页，判断类信息写入 <code>knowledge/</code> 目录 3. <code>gbrain import</code> 导入个人 brain</p>
+<p><strong>从 Claude Projects 迁移</strong>： 1. 复制 Project Instructions 的内容 2. 角色、偏好、工具链部分写入画像页；业务上下文部分写入 <code>knowledge/</code> 目录 3. <code>gbrain import</code> 导入个人 brain</p>
+<p><strong>从 Cursor Rules 迁移</strong>： 1. 读取 <code>.cursorrules</code> 或 <code>.cursor/rules</code> 文件 2. 编码偏好、项目约定写入 <code>knowledge/coding-preferences.md</code> 3. <code>gbrain import</code> 导入个人 brain</p>
+<p>迁移不是一次性搬家。先迁移最常重复解释的 3-5 条信息，跑通查询验证后再逐步扩展。</p>
+<h3 id="双脑协作个人判断何时升级为业务判断">双脑协作：个人判断何时升级为业务判断</h3>
+<p>两个 brain 不需要自动同步，靠你的判断决定什么该流动：</p>
+<p><strong>从个人到业务</strong>：你在个人 brain 里记录了一个竞品观察——连续三周跟踪某个竞品的定价策略变化。当你判断这个观察对团队有价值时，整理成正式的竞品分析页，经团队确认后写入业务 brain 的 <code>topics/competitors/</code> 目录。</p>
+<p><strong>从业务到个人</strong>：团队在业务 brain 里确认了”库存覆盖不足 21 天时暂停放量”这条规则。你在个人 brain 的画像页中引用这条规则——这样即使你在非工作场景使用 AI，它也知道你团队的关键业务约束。</p>
+<p>核心原则：业务 brain 的内容需要团队共识才能写入（Ch20 的五步走），个人 brain 的内容由你自己决定。两者之间的流动是手动的、经过判断的，不是自动同步。</p>
+<div class="callout-action">
+<p>建一个 <code>personal-brain/</code> 目录，写第一页个人画像。先写三段：你的角色、你的工具链、你最不想每次重复解释的上下文。不需要完美——先有，再迭代。</p>
+</div>
+<div class="part-divider">
+<p>第六部分：风险与下一步</p>
+</div>
+<h2 id="什么不该进入-gbrain">23 什么不该进入 GBrain</h2>
+<div class="callout-question">
+<p>GBrain 会不会变成新的资料垃圾桶？</p>
+</div>
+<p>会，如果没有边界。</p>
+<p><strong>适合进入 GBrain 的内容：</strong> 经确认的业务判断、复盘结论、决策原因、后续结果、关键关系、来源摘要、治理规则、可复用 SOP。</p>
+<p><strong>不适合直接进入 GBrain 的内容：</strong> 未清洗原始 CSV、大量截图、无结论聊天记录、未确认模型推断、敏感凭证、临时脑暴、可从系统实时查询的明细数据。</p>
+<p>GBrain 不是数据仓库，也不是资料收纳箱。它应该沉淀”判断、关系、来源摘要、复盘、决策”。</p>
+<div class="callout-example">
+<p>一份北美站的渠道原始报表不需要全量写入 GBrain。应该先由脚本或 Agent 处理，再把”本周关键异常、判断、动作、后续观察”写进复盘页。</p>
+</div>
+<div class="callout-action">
+<p>给每条材料打标签：raw data、source digest、formal knowledge。只有后两类考虑进入 GBrain。</p>
+</div>
+<h2 id="风险幻觉写入知识污染维护成本过度自动化">24 风险：幻觉写入、知识污染、维护成本、过度自动化</h2>
+<div class="callout-question">
+<p>GBrain 可能带来什么新风险？</p>
+</div>
+<p>AI 第二大脑不是越大越好。真正的风险在于，它会让错误判断变得更持久。</p>
+<p><strong>幻觉写入</strong>：模型推断没有来源，却被写成正式结论。解决办法：关键判断必须区分 Fact、Analysis、Seller Fit。</p>
+<p><strong>知识污染</strong>：重复页面、旧结论、冲突命名、断链页面越来越多。解决办法：定期维护、合并、标记 stale、跑 eval。</p>
+<p><strong>维护成本</strong>：页面结构太复杂，团队写不动。解决办法：第一版 schema 要轻，只保留真正会复用的字段。</p>
+<p><strong>过度自动化</strong>：Agent 直接把建议当动作执行。解决办法：关键业务动作必须有人类确认，特别是预算、价格、库存、供应链和合规相关动作。</p>
+<div class="callout-action">
+<p>写一页 <code>BOUNDARIES.md</code>，明确哪些内容可以自动写，哪些只能建议，哪些必须人工复核。</p>
+</div>
+<h2 id="给不同团队的落地建议">25 给不同团队的落地建议</h2>
+<div class="callout-question">
+<p>不同阶段的跨境团队，应该从哪里开始？</p>
+</div>
+<h3 id="非技术卖家老板">非技术卖家老板</h3>
+<p>你不需要先懂数据库和 MCP。先判断三件事：团队是否已经有稳定复盘、是否有重复出现的业务判断、是否希望 Agent 在下次任务前读到历史。如果这三件事都成立，AI 第二大脑值得开始做最小版。</p>
+<h3 id="懂一点-ai-工具的运营负责人">懂一点 AI 工具的运营负责人</h3>
+<p>先搭流程，不追工具完整度：一个复盘场景、一个 Markdown repo、一个 Obsidian 编辑入口、一个 GBrain 查询入口、一个 Skill 判断流程、一个飞书回流模板。</p>
+<h3 id="准备搭内部-ai-工作流的执行者">准备搭内部 AI 工作流的执行者</h3>
+<p>先把基础工程做稳：schema、resolver、source digest、formal page、sync/embed、query、eval、写入边界。</p>
+<h3 id="个人用户-独立卖家">个人用户 / 独立卖家</h3>
+<p>如果你不是团队，而是一个人在做跨境电商，或者你想在团队工作之外建自己的 AI 增强：先建个人 brain，写画像页和工作偏好，把跨模型重复解释变成 Agent 能读的页面。不需要 Remote MCP，不需要 OAuth，一个本地 <code>gbrain serve</code> 就够。等你觉得某些判断对团队也有用时，再考虑写入业务 brain。</p>
+<div class="callout-action">
+<p>按你的角色选一个最小动作。老板定场景，负责人定流程，执行者定结构，个人用户写画像页。</p>
+</div>
+<h2 id="结语从-skill-工具箱到-ai-native-第二大脑">26 结语：从 Skill 工具箱到 AI Native 第二大脑</h2>
+<div class="callout-question">
+<p>读完以后，应该带走什么判断？</p>
+</div>
+<p>跨境电商的 AI 化会经历三个阶段：</p>
+<p>第一阶段，是 prompt 和单次问答——让 AI 帮我做一点事。</p>
+<p>第二阶段，是 Skill 和 MCP——让 Agent 按流程做事、连接工具做事。</p>
+<p>第三阶段，是 AI Native 第二大脑——让 Agent 带着组织的长期判断做事。</p>
+<p>GBrain 的价值，在第三阶段才真正出现。它不替代 Obsidian，也不替代人类判断，而是让跨境电商团队的产品、流量、竞品、供应链和复盘判断，既能被人读懂、编辑、追溯，也能被 Agent 检索、调用、维护。</p>
+<p>但三个阶段只解决了”组织”的问题。还有一个更长远的问题：你和 Agent 之间的关系。</p>
+<p>今天你每开一个新对话，Agent 都像一个刚入职的新同事——聪明，但对你一无所知。你不断重复你的背景、偏好、过往判断，它不断遗忘。这不是某个模型的缺陷，而是”记忆被锁在对话里”的结构性问题。</p>
+<p>个人大脑改变的就是这个结构。当 Agent 能够持续读取你的画像、偏好、决策历史和长期积累的认知，你们之间才可能建立真正的长期协作——不是每次从头开始的问答，而是基于持续理解的搭档关系。业务大脑服务组织，个人大脑服务你自己。两层记忆，才是完整的 AI Native 第二大脑。</p>
+<p>如果你今天只记住一句话，就记住这句：</p>
+<blockquote>
+<p>跨境电商的 AI 第二大脑，不是资料越多越好，而是每一次业务判断都能被下一次 Agent 正确召回。</p>
+</blockquote>
+<p>从一个跨境业务复盘页面开始。只要下一次 Agent 因为这页少犯一次旧错误，这套系统就开始有价值。</p>
+<hr />
+<p>这本书是初稿。很多判断还在验证，很多做法还在迭代。我自己也在用这套方法搭建和维护跨境电商的 AI 第二大脑，走到今天的判断不一定全对，但至少是真实踩过坑之后的总结。</p>
+<p>如果你尝试落地后有反馈、有问题、或者想看看别人怎么做的——欢迎通过「Zach的进化笔记」公众号加入微信交流群，直接聊，不需要任何付费门槛。如果你还想看更多实操过程的记录和讨论，知识星球是另一个选择：不是课程，是一群正在落地的人的持续讨论。</p>
+<p>这本书会一直开源。后续的迭代和修正会同步更新到 GitHub 仓库，你随时可以拿到最新版。</p>
+<div class="qr-section">
+<p>扫码交流</p>
+<div class="qr-cards">
+<div class="qr-card qr-wechat">
+<img src="../assets/qr-wechat.jpg" alt="Zach的进化笔记 公众号">
+<p class="qr-label">
+公众号：Zach的进化笔记
+</p>
+<p class="qr-desc">
+回复”第二大脑”加读者群<br>免费交流，有问题直接聊
+</p>
+</div>
+<div class="qr-card qr-zsxq">
+<img src="../assets/qr-zsxq.png" alt="Zach的跨境AI资产库 知识星球">
+<p class="qr-label">
+知识星球：Zach的跨境AI资产库
+</p>
+<p class="qr-desc">
+深入交流 AI 落地到企业的卡点，沉淀未来的 AI 资产
+</p>
+</div>
+</div>
+</div>
+<h2 id="附录-a术语表">附录 A：术语表</h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>简明解释</th>
+<th>跨境业务例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>一份完整材料</td>
+<td>渠道报告、会议纪要、竞品观察</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>可命名知识单元</td>
+<td>产品页、复盘页、决策页</td>
+</tr>
+<tr>
+<td>Chunk</td>
+<td>检索片段</td>
+<td>从长报告切出的段落</td>
+</tr>
+<tr>
+<td>Embedding</td>
+<td>文本向量</td>
+<td>找语义相似的业务问题</td>
+</tr>
+<tr>
+<td>Index</td>
+<td>检索索引</td>
+<td>按产品、渠道、向量快速找</td>
+</tr>
+<tr>
+<td>Wikilink</td>
+<td>Markdown 内部链接</td>
+<td><code>[[厨房收纳盒]]</code></td>
+</tr>
+<tr>
+<td>Graph</td>
+<td>关系网</td>
+<td>产品 → 渠道 → 决策</td>
+</tr>
+<tr>
+<td>Typed links</td>
+<td>有类型的关系</td>
+<td><code>决策 -&gt; 影响 -&gt; 广告活动</code></td>
+</tr>
+<tr>
+<td>Schema</td>
+<td>页面结构约定</td>
+<td>frontmatter 字段</td>
+</tr>
+<tr>
+<td>Resolver</td>
+<td>名称解析</td>
+<td>SKU、平台 ID、内部名对齐</td>
+</tr>
+<tr>
+<td>Source digest</td>
+<td>来源摘要页</td>
+<td>一份竞品报告的证据摘要</td>
+</tr>
+<tr>
+<td>Formal page</td>
+<td>正式知识页</td>
+<td>经确认的产品复盘结论</td>
+</tr>
+<tr>
+<td>Compiled Truth</td>
+<td>当前可信结论</td>
+<td>当前渠道策略</td>
+</tr>
+<tr>
+<td>Timeline</td>
+<td>关键变化记录</td>
+<td>每次调整和结果</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>Agent 工具接入协议</td>
+<td>Agent 查询 GBrain</td>
+</tr>
+<tr>
+<td>Skill</td>
+<td>业务判断流程</td>
+<td>流量复盘规则</td>
+</tr>
+<tr>
+<td>Eval</td>
+<td>检查问题集</td>
+<td>“为什么上次暂停预算？”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="附录-b样例页面模板">附录 B：样例页面模板</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="an">type:</span><span class="co"> business_review</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="an">product:</span><span class="co"> 厨房收纳盒-基础款</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="an">channel:</span><span class="co"> 北美站-搜索广告</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="an">week:</span><span class="co"> 2026-W20</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="an">owner:</span><span class="co"> growth</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="an">status:</span><span class="co"> active</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="an">source_type:</span><span class="co"> codex_analysis</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="an">review_required:</span><span class="co"> true</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># 厨房收纳盒-基础款 跨境业务复盘 2026-W20</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Compiled Truth</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>当前核心渠道维持预算，不继续放量。</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>主要原因不是流量无效，而是供应链约束仍未解除。</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>下次复核条件：库存覆盖超过 21 天，且转化率保持稳定。</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Links</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Product：[<span class="co">[</span><span class="ot">厨房收纳盒-基础款</span><span class="co">]</span>]</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Channel：[<span class="co">[</span><span class="ot">北美站-搜索广告</span><span class="co">]</span>]</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Campaign：[<span class="co">[</span><span class="ot">核心搜索广告-Q2</span><span class="co">]</span>]</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Competitor：[<span class="co">[</span><span class="ot">竞品B-低价收纳</span><span class="co">]</span>]</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Decision：[<span class="co">[</span><span class="ot">Decision-2026-05-13-维持预算</span><span class="co">]</span>]</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fact</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>本周核心渠道转化率保持稳定。</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>供应链交付周期仍高于目标区间。</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>竞品 B 出现短期降价。</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analysis</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>继续放量可能增加交付风险。</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>竞品降价暂不构成长期价格带变化。</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Seller Fit</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>适用于当前库存和交付受限的产品。</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若供应链恢复，需要重新评估渠道预算。</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Open Threads</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>下周复核供应链覆盖。</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>观察竞品 B 降价是否持续。</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Timeline</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2026-05-06：渠道表现恢复，但供应链仍受限。</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2026-05-13：决定维持预算，不继续放量。</span></code></pre></div>
+<h2 id="附录-c七步上手清单">附录 C：七步上手清单</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>步骤</th>
+<th>做什么</th>
+<th>参考命令 / 操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>写一页最小业务术语表</td>
+<td>在 <code>seller-brain/</code> 下新建 <code>glossary.md</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>整理 20 条低风险知识样本</td>
+<td>每条不超过 150 字，明确对象、判断、关系、时间线</td>
+</tr>
+<tr>
+<td>3</td>
+<td>建最小 Markdown brain repo</td>
+<td>按 Chapter 15 的目录模板建文件夹</td>
+</tr>
+<tr>
+<td>4</td>
+<td>写 <code>schema.md</code> 和 <code>RESOLVER.md</code></td>
+<td>参考附录 B 的 frontmatter 字段</td>
+</tr>
+<tr>
+<td>5</td>
+<td>用 Obsidian 打开 repo，确认人能阅读和编辑</td>
+<td>Obsidian → Open folder as vault</td>
+</tr>
+<tr>
+<td>6</td>
+<td>接入 GBrain，执行 sync / embed / query</td>
+<td><code>gbrain import ./seller-brain</code> → <code>gbrain embed --stale</code> → <code>gbrain query "上次为什么暂停预算？"</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>建 10 个 eval 问题，每周抽查</td>
+<td>先人工回答，再让 GBrain 回答，对比差距；多人接入前写 <code>ACCESS_POLICY.md</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="附录-d来源与参考资料">附录 D：来源与参考资料</h2>
+<p>本书只在公开稿中标注可公开访问的来源。内部搭建记录和讨论只作为写作输入，不作为公开引用列出。</p>
+<p>公开来源：</p>
+<ul>
+<li><a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">Karpathy: LLM Wiki</a>：用于确认 LLM Wiki 的核心思想、三层架构、ingest/query/lint、index.md、log.md、Obsidian 与 LLM 的关系。</li>
+<li><a href="https://github.com/garrytan/gbrain">garrytan/gbrain 官方仓库</a>：用于确认项目定位、核心模块和公开能力边界。</li>
+<li><a href="https://github.com/garrytan/gbrain/blob/master/README.md">GBrain README</a>：用于确认 Hybrid Search、self-wiring graph、structured timeline、MCP、34 skills、skillpack、book-mirror、media-ingest、brain-pdf、X-to-Brain、Voice-to-Brain 等公开说明。</li>
+<li><a href="https://github.com/garrytan/gbrain/blob/master/docs/GBRAIN_SKILLPACK.md">GBrain Skillpack docs</a>：用于确认 Brain-Agent Loop、Content &amp; Media Ingestion、20+ recurring jobs、X-to-Brain、Voice-to-Brain、Upgrades &amp; Auto-Update 等框架化能力。</li>
+<li><a href="https://github.com/garrytan/gbrain/blob/master/SECURITY.md">GBrain Security</a>：用于确认 Remote MCP 的 token 管理、OAuth client registration 风险、rate limit、audit log 和 redacted params。</li>
+<li><a href="https://x.com/garrytan/status/2042497872114090069">Garry Tan 关于 GBrain total recall 的 X 推文</a>：用于确认他公开把 GBrain 描述为 OpenClaw / Hermes Agent 的长期记忆。</li>
+<li><a href="https://x.com/garrytan/status/2043103243732226496">Garry Tan 关于 GBrain voice/context 的 X 推文</a>：用于确认 GBrain 进入 voice/context 场景后的公开讨论。</li>
+<li><a href="https://x.com/i/trending/2042548874871513262">X trending: Garry Tan Open-Sources GBrain for AI Agent Memory</a>：辅助来源。</li>
+<li><a href="https://www.ycombinator.com/people/garry-tan">Y Combinator: Garry Tan</a>：用于确认 Garry Tan 的公开身份。</li>
+<li><a href="https://repo-explainer.com/garrytan/gbrain/">Repo Explainer 对 GBrain 的解读</a>：用于参考 agent-maintained memory 与普通 Obsidian + embedding 的区别。</li>
+<li><a href="https://www.chooseai.net/news/3236/">ChooseAI 对 GBrain 的中文介绍</a>：用于参考 LLM Wiki 到工程化检索层的延伸。</li>
+<li><a href="https://xtrace.ai/blog/every-tool-is-solving-a-different-memory-problem">XTrace 关于 AI memory 新范式的文章</a>：用于参考 Karpathy LLM Wiki 与 GBrain 所在的更大讨论。</li>
+<li><a href="https://x.com/garrytan/status/2055670533451366479">Garry Tan: GBrain 主介绍线程（2026/5/16）</a>：用于确认 GBrain 定性为”knowledge system, not RAG in a box”、8 层记忆架构、Personal AI、MIT 开源。</li>
+<li><a href="https://x.com/garrytan/status/2055310116325560647">Garry Tan: GBrain 成本对比帖（2026/5/15）</a>：用于参考维护者对 GBrain 成本效益的公开表述。</li>
+<li><a href="https://x.com/garrytan/status/2054055071017538028">Garry Tan: GBrain 重大更新帖（2026/5/12）</a>：用于确认 hot memory、facts extraction、72h 14 PRs 等迭代速度。</li>
+<li><a href="https://x.com/garrytan/status/2055884666264269177">Garry Tan: GBrain multiplayer/federated repos（2026/5/17）</a>：用于确认 7 人团队多人使用、federated repos（个人+工作仓库并存）。</li>
+<li><a href="https://x.com/garrytan/status/2056119107133870149">Garry Tan: ZeroEntropy 嵌入默认（2026/5/17）</a>：参考来源。</li>
+<li><a href="https://x.com/garrytan/status/2054036840521342996">Garry Tan: GBrain 开发哲学（2026/5/12）</a>：参考来源。</li>
+<li><a href="https://x.com/garrytan/status/2046981289031667961">Garry Tan: SKILLIFY 循环（2026/4/22）</a>：参考来源。</li>
+<li><a href="https://x.com/garrytan/status/2035366660451041387">Garry Tan: GBrain 早期开源宣告（2026/3/21）</a>：参考来源。</li>
+</ul>
+<p>本稿区分三类信息：</p>
+<ul>
+<li>事实来源：公开仓库、公开解读文章和公开人物页；</li>
+<li>分析推断：本书围绕跨境电商场景做出的系统化解释；</li>
+<li>适用条件：多产品、多渠道、多数据源、有复盘节奏、有 Agent 化需求，并愿意维护结构化页面。</li>
+</ul>
+<h2 id="附录-e后续学习路径">附录 E：后续学习路径</h2>
+<p>这本书是开源项目，会持续更新。后续的迭代、修正和新增内容会同步到 GitHub 仓库。</p>
+<p>如果你已经跑通了前面的步骤，接下来会遇到更具体的问题：</p>
+<ul>
+<li>schema 怎么随业务扩展而不失控？</li>
+<li>多人写入时怎么防止知识污染？</li>
+<li>竞品分析 Skill 怎么写得更稳？</li>
+<li>飞书 → Obsidian → GBrain 的自动化链路怎么搭？</li>
+<li>eval 怎么从 10 个问题扩展到业务级验收？</li>
+<li>不同产品线、不同市场的 brain 要不要分开？</li>
+</ul>
+<p>这些问题我们也在摸索。这本书给出的是到目前为止的判断框架，不是最终答案。</p>
+<p><strong>微信交流群</strong>：关注「Zach的进化笔记」公众号，回复”第二大脑”加入读者群。有问题直接聊，免费。</p>
+<p><strong>知识星球</strong>：如果你想看更多落地过程中的真实讨论、踩坑记录和其他卖家的实操案例，「Zach的进化笔记」知识星球是一群正在落地的人的持续讨论，不是课程。</p>
+<p>如果你只想先做一个动作：从一页跨境业务复盘开始。不要等系统完美，先让下一次 Agent 能读到上一次人的判断。</p>
+<h2 id="附录-f场景速查表">附录 F：场景速查表</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>我想…</th>
+<th>看哪章</th>
+<th>关键操作</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>理解为什么需要 AI 知识库</td>
+<td>00 前言</td>
+<td>读”你的 Agent 现在缺什么”</td>
+<td>不需要技术背景</td>
+</tr>
+<tr>
+<td>判断 RAG / LLM Wiki / GBrain 该选谁</td>
+<td>02</td>
+<td>对比表</td>
+<td>看你是在查资料、整理页面还是需要长期记忆</td>
+</tr>
+<tr>
+<td>理解三层基础概念</td>
+<td>04</td>
+<td>来源层 → 知识层 → 使用层</td>
+<td>先看厨房收纳盒例子</td>
+</tr>
+<tr>
+<td>理清 Obsidian 和 GBrain 怎么配合</td>
+<td>06</td>
+<td>Obsidian 做编辑台，GBrain 做 Agent 记忆层</td>
+<td>不是二选一</td>
+</tr>
+<tr>
+<td>列出我的业务知识对象</td>
+<td>08</td>
+<td>写一页术语表</td>
+<td>先覆盖 8 类核心对象</td>
+</tr>
+<tr>
+<td>搭第一个 brain repo</td>
+<td>15</td>
+<td>按目录模板建文件夹</td>
+<td>先写 <code>schema.md</code> 和 <code>RESOLVER.md</code></td>
+</tr>
+<tr>
+<td>写一条业务复盘</td>
+<td>16, 附录 B</td>
+<td>复制模板，填 Compiled Truth + Timeline</td>
+<td>不要跳过 Open Threads</td>
+</tr>
+<tr>
+<td>做一次竞品分析</td>
+<td>17</td>
+<td>建竞品观察页</td>
+<td>区分事实和推断</td>
+</tr>
+<tr>
+<td>让 GBrain 跑起来</td>
+<td>18</td>
+<td><code>gbrain import</code> → <code>embed --stale</code> → <code>query</code></td>
+<td>先 sync 再 query</td>
+</tr>
+<tr>
+<td>检查 brain 是否好用</td>
+<td>19</td>
+<td>10 个 eval 问题</td>
+<td>先人工回答，再让 GBrain 回答，对比差距</td>
+</tr>
+<tr>
+<td>接入团队使用</td>
+<td>20</td>
+<td>Remote MCP + OAuth</td>
+<td>先 read-only，再开 write</td>
+</tr>
+<tr>
+<td>理解双脑架构</td>
+<td>21</td>
+<td>双脑分工表</td>
+<td>业务大脑和个人大脑不是二选一</td>
+</tr>
+<tr>
+<td>搭个人大脑</td>
+<td>22</td>
+<td>建目录、写画像页、接入模型</td>
+<td>先写画像页，不急着迁移</td>
+</tr>
+<tr>
+<td>判断某个经验该不该入库</td>
+<td>23</td>
+<td>四条排除规则</td>
+<td>实时数据不入、流程级交给 Skill</td>
+</tr>
+</tbody>
+</table>
+<div class="book-footer">
+<p>卖家第二大脑：GBrain 实战笔记 · Zach的进化笔记 · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+</div>
+<script>
+// Chapter heading enhancement: split "## 00 Title" into separate number + title
+// Gives Stripe Press-style large chapter number display
+document.querySelectorAll('h2').forEach(function(h2) {
+  var text = h2.textContent.trim();
+  var match = text.match(/^(\d{1,2})\s+(.+)$/);
+  if (match) {
+    h2.innerHTML = '<span class="ch-num">' + match[1].padStart(2, '0') + '</span>' + match[2];
+    h2.classList.add('chapter-heading');
+  }
+});
+</script>
+</body>
+</html>

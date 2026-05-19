@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600" role="img" aria-labelledby="title desc">
+  <title id="title">GBrain orange book cover</title>
+  <desc id="desc">Book cover for the GBrain cross-border commerce orange book.</desc>
+  <rect width="1200" height="1600" fill="#f7f1e7"/>
+  <rect x="90" y="90" width="1020" height="1420" fill="#fffaf2" stroke="#2b2118" stroke-width="4"/>
+  <text x="140" y="260" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="86" font-weight="700" fill="#2b2118">GBrain</text>
+  <text x="140" y="360" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="78" font-weight="700" fill="#d85f2a">橙皮书</text>
+  <text x="140" y="455" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="38" fill="#5d5147">跨境电商 AI Native 第二大脑的实战指南</text>
+  <g transform="translate(150 660)">
+    <rect x="0" y="0" width="220" height="120" fill="#f0e1cf" stroke="#2b2118" stroke-width="3"/>
+    <rect x="310" y="0" width="220" height="120" fill="#f0e1cf" stroke="#2b2118" stroke-width="3"/>
+    <rect x="620" y="0" width="220" height="120" fill="#f0e1cf" stroke="#2b2118" stroke-width="3"/>
+    <path d="M220 60 H310 M530 60 H620" stroke="#d85f2a" stroke-width="8" stroke-linecap="round"/>
+    <text x="44" y="70" font-family="JetBrains Mono, Menlo, monospace" font-size="28" fill="#2b2118">page</text>
+    <text x="349" y="70" font-family="JetBrains Mono, Menlo, monospace" font-size="28" fill="#2b2118">graph</text>
+    <text x="663" y="70" font-family="JetBrains Mono, Menlo, monospace" font-size="28" fill="#2b2118">agent</text>
+  </g>
+  <path d="M150 970 C300 850, 420 1000, 560 910 S800 790, 1010 950" fill="none" stroke="#2f6f6d" stroke-width="12" stroke-linecap="round"/>
+  <text x="140" y="1320" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="34" fill="#6d6258">Zach的进化笔记 | 跨境AI资产库</text>
+  <text x="140" y="1390" font-family="JetBrains Mono, Menlo, monospace" font-size="24" fill="#6d6258">2026 cross-border AI builder guide</text>
+</svg>

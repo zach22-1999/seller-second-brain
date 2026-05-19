@@ -1,0 +1,12 @@
+<script>
+// Chapter heading enhancement: split "## 00 Title" into separate number + title
+// Gives Stripe Press-style large chapter number display
+document.querySelectorAll('h2').forEach(function(h2) {
+  var text = h2.textContent.trim();
+  var match = text.match(/^(\d{1,2})\s+(.+)$/);
+  if (match) {
+    h2.innerHTML = '<span class="ch-num">' + match[1].padStart(2, '0') + '</span>' + match[2];
+    h2.classList.add('chapter-heading');
+  }
+});
+</script>

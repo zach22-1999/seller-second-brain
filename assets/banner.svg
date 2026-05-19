@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520" role="img" aria-labelledby="title desc">
+  <title id="title">GBrain orange book banner</title>
+  <desc id="desc">A calm editorial banner for the GBrain cross-border commerce orange book.</desc>
+  <rect width="1600" height="520" fill="#f7f1e7"/>
+  <rect x="70" y="70" width="1460" height="380" fill="#fffaf2" stroke="#2b2118" stroke-width="3"/>
+  <path d="M120 390 C260 280, 360 330, 510 210 S820 150, 1010 270 S1290 360, 1480 150" fill="none" stroke="#d85f2a" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="230" cy="315" r="18" fill="#2f6f6d"/>
+  <circle cx="520" cy="210" r="18" fill="#d85f2a"/>
+  <circle cx="820" cy="174" r="18" fill="#2b2118"/>
+  <circle cx="1110" cy="304" r="18" fill="#2f6f6d"/>
+  <circle cx="1390" cy="240" r="18" fill="#d85f2a"/>
+  <text x="120" y="165" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="70" font-weight="700" fill="#2b2118">GBrain 橙皮书</text>
+  <text x="122" y="230" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="34" fill="#5d5147">跨境电商 AI Native 第二大脑的实战指南</text>
+  <text x="122" y="415" font-family="PingFang SC, Noto Serif CJK SC, serif" font-size="26" fill="#6d6258">Zach的进化笔记 | 跨境AI资产库</text>
+  <text x="1005" y="415" font-family="JetBrains Mono, Menlo, monospace" font-size="24" fill="#6d6258">cross-border / page-first / agent brain</text>
+</svg>

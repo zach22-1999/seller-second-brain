@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+*.log
+tmp/
+private/
+
+# 本地开发工具和迭代记录
+docs/ITERATIONS.md
+docs/PUBLISHING.md
+scripts/debug-css.mjs
+scripts/screenshot-pages.mjs
+scripts/screenshot-pdf.mjs
+.claude/
+dist/_cover.pdf
+dist/_content.pdf
+dist/seller-second-brain-no-bookmarks.pdf
